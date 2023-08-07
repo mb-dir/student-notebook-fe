@@ -7,7 +7,9 @@ const Layout = (props: Props) => {
   return (
     <div className="wrapper">
       <Header />
-      <Outlet />
+      <div className="wrapper__content">
+        <Outlet />
+      </div>
     </div>
   );
 };
