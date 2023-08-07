@@ -1,9 +1,9 @@
+@import "../../components/layout/variables";
 .registerWrapper {
-  border: 2px solid #4147af;
+  border: 2px solid $blue;
   border-radius: 5px;
   width: 30%;
   margin: 50px auto 0;
-  text-align: center;
   min-height: 400px;
   display: flex;
   flex-direction: column;
@@ -21,11 +21,11 @@
   }
   &__input {
     border: none;
-    border-bottom: 2px solid #4147af;
+    border-bottom: 2px solid $blue;
     padding: 5px;
     &:focus {
       outline: none;
-      border: 1px dashed #4147af;
+      border: 1px dashed $blue;
       border-radius: 5px;
     }
   }
