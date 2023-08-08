@@ -27,6 +27,7 @@ const Login = (props: Props) => {
           id="password"
         />
       </form>
+      <button className="loginWrapper__button">Login</button>
     </div>
   );
 };
