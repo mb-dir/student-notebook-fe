@@ -1,20 +1,38 @@
+import { FormEvent, ChangeEvent, useState } from "react";
 import "./styles.scss";
 
-type Props = {};
-
-const Login = (props: Props) => {
+const Login = () => {
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    // TODO - handle error messages, add validation, reset state, use axios
+    e.preventDefault();
+    const res = await fetch("/api/user/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email, password }),
+    });
+    const data = await res.json();
+    console.log(data);
+  };
   return (
     <div className="loginWrapper">
       <h2 className="loginWrapper__header">Login</h2>
-      <form className="loginForm">
+      <form className="loginForm" onSubmit={handleSubmit}>
         <label className="loginForm__label" htmlFor="email">
           e-mail
         </label>
         <input
+          value={email}
           className="loginForm__input"
           type="email"
           name="email"
           id="email"
+          onChange={(e: ChangeEvent<HTMLInputElement>) =>
+            setEmail(e.target.value)
+          }
         />
 
         <label className="loginForm__label" htmlFor="password">
@@ -22,12 +40,16 @@ const Login = (props: Props) => {
         </label>
         <input
           className="loginForm__input"
+          value={password}
           type="password"
           name="password"
           id="password"
+          onChange={(e: ChangeEvent<HTMLInputElement>) =>
+            setPassword(e.target.value)
+          }
         />
+        <button className="loginWrapper__button">Login</button>
       </form>
-      <button className="loginWrapper__button">Login</button>
     </div>
   );
 };
