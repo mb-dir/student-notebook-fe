@@ -1,10 +1,12 @@
 import { FormEvent, ChangeEvent, useState } from "react";
+import { useUserContext } from "../../hooks/useUserContext";
 import "./styles.scss";
 
 const Login = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [error, setError] = useState<string>("");
+  const { login } = useUserContext();
 
   const resetState = () => {
     setEmail("");
@@ -13,7 +15,7 @@ const Login = () => {
   };
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    // TODO - handle error messages, add validation, reset state, use axios
+    // TODO - use axios
     e.preventDefault();
     const res = await fetch("/api/user/login", {
       method: "POST",
@@ -24,7 +26,7 @@ const Login = () => {
     });
     const data = await res.json();
     if (res.status === 200) {
-      // Save user data in context
+      login(data);
       resetState();
     } else {
       setError(data.error);
