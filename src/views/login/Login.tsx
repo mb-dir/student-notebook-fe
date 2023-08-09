@@ -61,7 +61,7 @@ const Login = () => {
             setPassword(e.target.value)
           }
         />
-        <button className="loginWrapper__button">Login</button>
+        <button className="loginForm__button">Login</button>
       </form>
       <div className="loginWrapper__error">{error && error}</div>
     </div>
