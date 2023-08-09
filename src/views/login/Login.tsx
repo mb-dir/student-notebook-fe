@@ -43,6 +43,7 @@ const Login = () => {
           type="email"
           name="email"
           id="email"
+          required
           onChange={(e: ChangeEvent<HTMLInputElement>) =>
             setEmail(e.target.value)
           }
@@ -57,6 +58,7 @@ const Login = () => {
           type="password"
           name="password"
           id="password"
+          required
           onChange={(e: ChangeEvent<HTMLInputElement>) =>
             setPassword(e.target.value)
           }
