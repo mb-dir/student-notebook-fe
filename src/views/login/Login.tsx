@@ -4,6 +4,14 @@ import "./styles.scss";
 const Login = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const [error, setError] = useState<string>("");
+
+  const resetState = () => {
+    setEmail("");
+    setPassword("");
+    setError("");
+  };
+
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     // TODO - handle error messages, add validation, reset state, use axios
     e.preventDefault();
@@ -15,7 +23,12 @@ const Login = () => {
       body: JSON.stringify({ email, password }),
     });
     const data = await res.json();
-    console.log(data);
+    if (res.status === 200) {
+      // Save user data in context
+      resetState();
+    } else {
+      setError(data.error);
+    }
   };
   return (
     <div className="loginWrapper">
@@ -50,6 +63,7 @@ const Login = () => {
         />
         <button className="loginWrapper__button">Login</button>
       </form>
+      <div className="loginWrapper__error">{error && error}</div>
     </div>
   );
 };

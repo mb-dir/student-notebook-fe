@@ -24,6 +24,13 @@
       cursor: pointer;
     }
   }
+  &__error {
+    width: 100%;
+    min-height: 20px;
+    padding: 5px;
+    color: red;
+    margin-top: 10px;
+  }
 }
 .loginForm {
   display: flex;
