@@ -9,7 +9,6 @@ export const PublicRoutes = () => {
       <Route path="/" element={<Homepage />} />
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
-      {/* custom 404 here */}
       <Route path="*" element={<Navigate to="/login" replace />} />
     </Routes>
   );

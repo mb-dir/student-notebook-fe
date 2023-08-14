@@ -5,8 +5,7 @@ export const PrivateRoutes = () => {
   return (
     <Routes>
       <Route path="/" element={<UserDashboard />} />
-      {/* Custom 404 */}
-      {/* <Route path="*" element={<Navigate to="/" replace />} /> */}
+      <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   );
 };
