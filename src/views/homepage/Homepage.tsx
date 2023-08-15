@@ -1,6 +1,6 @@
-type Props = {};
+import { FC } from "react";
 
-const Homepage = (props: Props) => {
+const Homepage: FC = () => {
   return (
     <main>
       <h2>Student notebook app</h2>

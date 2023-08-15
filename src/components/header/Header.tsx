@@ -1,10 +1,10 @@
+import { FC } from "react";
 import { Link } from "react-router-dom";
 import "./style.scss";
 import { useUserContext } from "../../hooks/useUserContext";
 import Menu from "../menu/Menu";
-type Props = {};
 
-const Header = (props: Props) => {
+const Header: FC = () => {
   const { user } = useUserContext();
   return (
     <header className="header">

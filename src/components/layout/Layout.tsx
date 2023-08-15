@@ -1,9 +1,9 @@
 import "./styles.scss";
 import { Outlet } from "react-router";
+import { FC } from "react";
 import Header from "../header/Header";
-type Props = {};
 
-const Layout = (props: Props) => {
+const Layout: FC = () => {
   return (
     <div className="wrapper">
       <Header />

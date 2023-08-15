@@ -1,8 +1,6 @@
-import React from "react";
+import { FC } from "react";
 
-type Props = {};
-
-const UserDashboard = (props: Props) => {
+const UserDashboard: FC = () => {
   return <div>UserDashboard</div>;
 };
 

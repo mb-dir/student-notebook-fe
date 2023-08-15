@@ -1,13 +1,12 @@
-import { useEffect } from "react";
+import { useEffect, FC } from "react";
 import { useUserContext } from "../../hooks/useUserContext";
 
-type Props = {};
-
-const Logout = (props: Props) => {
+const Logout: FC = () => {
   const { logout } = useUserContext();
   useEffect(() => {
     logout();
   }, [logout]);
+  // Toast here
   return <></>;
 };
 

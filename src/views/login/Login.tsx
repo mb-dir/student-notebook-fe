@@ -1,8 +1,8 @@
-import { FormEvent, ChangeEvent, useState } from "react";
+import { FormEvent, ChangeEvent, useState, FC } from "react";
 import { useUserContext } from "../../hooks/useUserContext";
 import "./styles.scss";
 
-const Login = () => {
+const Login: FC = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [error, setError] = useState<string>("");

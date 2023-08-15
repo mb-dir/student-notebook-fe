@@ -1,9 +1,10 @@
+import { FC } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
 import Homepage from "../views/homepage/Homepage";
 import Login from "../views/login/Login";
 import Register from "../views/register/Register";
 
-export const PublicRoutes = () => {
+export const PublicRoutes: FC = () => {
   return (
     <Routes>
       <Route path="/" element={<Homepage />} />

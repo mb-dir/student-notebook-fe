@@ -1,8 +1,7 @@
 import "./styles.scss";
+import { FC } from "react";
 
-type Props = {};
-
-const Register = (props: Props) => {
+const Register: FC = () => {
   return (
     <div className="registerWrapper">
       <h2 className="registerWrapper__header">Register</h2>

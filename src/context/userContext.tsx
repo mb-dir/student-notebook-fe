@@ -10,11 +10,11 @@ export type User = {
   email: string;
 };
 
-type UserContextType = {
+interface UserContextType {
   user: User | null;
   login: (user: User) => void;
   logout: () => void;
-};
+}
 
 export const UserContext = createContext<UserContextType | null>(null);
 
