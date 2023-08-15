@@ -1,4 +1,4 @@
-import { createContext, useState, ReactNode, FC, useEffect } from "react";
+import { createContext, useState, ReactNode, FC } from "react";
 
 interface UserProviderProps {
   children: ReactNode;
@@ -21,13 +21,16 @@ export const UserContext = createContext<UserContextType | null>(null);
 export const UserProvider: FC<UserProviderProps> = ({
   children,
 }: UserProviderProps) => {
-  const [user, setUser] = useState<User | null>(null);
-
-  useEffect(() => {
+  const [user, setUser] = useState<User | null>(() => {
     const storedUser = localStorage.getItem("user");
     const user: User = storedUser ? JSON.parse(storedUser) : null;
-    if (!!user) login(user);
-  }, []);
+
+    if (!!user) {
+      return user;
+    } else {
+      return null;
+    }
+  });
 
   const login = (newUser: User) => {
     setUser(newUser);
@@ -44,7 +47,6 @@ export const UserProvider: FC<UserProviderProps> = ({
     login,
     logout,
   };
-  console.log(user);
   return (
     <UserContext.Provider value={contextValue}>{children}</UserContext.Provider>
   );
