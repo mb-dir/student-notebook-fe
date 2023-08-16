@@ -1,66 +1,60 @@
-import { FormEvent, ChangeEvent, useState, FC } from "react";
+import { FC } from "react";
 import { useUserContext } from "../../hooks/useUserContext";
 import { userLogin } from "../../services/user";
+import { SubmitHandler, useForm } from "react-hook-form";
 import "./styles.scss";
 
+interface IFormInput {
+  email: string;
+  password: string;
+}
+
 const Login: FC = () => {
-  const [email, setEmail] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
-  const [error, setError] = useState<string>("");
   const { login } = useUserContext();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<IFormInput>();
 
-  const resetState = () => {
-    setEmail("");
-    setPassword("");
-    setError("");
-  };
-
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const onSubmit: SubmitHandler<IFormInput> = async ({ email, password }) => {
     try {
       const data = await userLogin({ email, password });
       login(data);
-      resetState();
     } catch (error: any) {
-      setError(error.response.data.error);
+      console.log(error);
     }
   };
+
   return (
     <div className="loginWrapper">
       <h2 className="loginWrapper__header">Login</h2>
-      <form className="loginForm" onSubmit={handleSubmit}>
+      <form className="loginForm" onSubmit={handleSubmit(onSubmit)}>
         <label className="loginForm__label" htmlFor="email">
           e-mail
         </label>
         <input
-          value={email}
+          {...register("email", { required: true })}
           className="loginForm__input"
           type="email"
-          name="email"
           id="email"
-          required
-          onChange={(e: ChangeEvent<HTMLInputElement>) =>
-            setEmail(e.target.value)
-          }
         />
 
         <label className="loginForm__label" htmlFor="password">
           password
         </label>
         <input
+          {...register("password", { required: true })}
           className="loginForm__input"
-          value={password}
           type="password"
-          name="password"
           id="password"
-          required
-          onChange={(e: ChangeEvent<HTMLInputElement>) =>
-            setPassword(e.target.value)
-          }
         />
         <button className="loginForm__button">Login</button>
       </form>
-      <div className="loginWrapper__error">{error && error}</div>
+      <div className="loginWrapper__error">
+        <p>{errors.email && "Email is required"}</p>
+        <p>{errors.password && "Password is required"}</p>
+      </div>
     </div>
   );
 };
