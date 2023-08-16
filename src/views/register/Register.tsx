@@ -1,6 +1,7 @@
-import { useUserContext } from "../../hooks/useUserContext";
-import "./styles.scss";
 import { useState, FC, ChangeEvent, FormEvent } from "react";
+import { useUserContext } from "../../hooks/useUserContext";
+import { userRegister } from "../../services/user";
+import "./styles.scss";
 
 const Register: FC = () => {
   const [username, setUsername] = useState<string>("");
@@ -19,25 +20,17 @@ const Register: FC = () => {
   };
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    // TODO - use axios
     e.preventDefault();
     if (password !== confirmPassword) {
       setError("Passwords are not the same!");
       return;
     }
-    const res = await fetch("/api/user/register", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ username, email, password }),
-    });
-    const data = await res.json();
-    if (res.status === 200) {
+    try {
+      const data = await userRegister({ username, email, password });
       login(data);
       resetState();
-    } else {
-      setError(data.error);
+    } catch (error: any) {
+      setError(error.response.data.error);
     }
   };
 
