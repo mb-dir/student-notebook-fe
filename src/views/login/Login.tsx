@@ -1,5 +1,6 @@
 import { FormEvent, ChangeEvent, useState, FC } from "react";
 import { useUserContext } from "../../hooks/useUserContext";
+import { userLogin } from "../../services/user";
 import "./styles.scss";
 
 const Login: FC = () => {
@@ -15,21 +16,13 @@ const Login: FC = () => {
   };
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    // TODO - use axios
     e.preventDefault();
-    const res = await fetch("/api/user/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ email, password }),
-    });
-    const data = await res.json();
-    if (res.status === 200) {
+    try {
+      const data = await userLogin({ email, password });
       login(data);
       resetState();
-    } else {
-      setError(data.error);
+    } catch (error: any) {
+      setError(error.response.data.error);
     }
   };
   return (

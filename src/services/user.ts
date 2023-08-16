@@ -15,3 +15,8 @@ export const userRegister = async (registerData: registerData) => {
 
   return data;
 };
+
+export const userLogin = async (loginData: Omit<registerData, "username">) => {
+  const { data } = await axiosInstance.post<User>("/user/login", loginData);
+  return data;
+};
