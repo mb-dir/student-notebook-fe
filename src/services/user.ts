@@ -5,6 +5,12 @@ type registerData = {
   username: string;
   email: string;
   password: string;
+  confirmPassword: string;
+};
+
+type loginData = {
+  email: string;
+  password: string;
 };
 
 export const userRegister = async (registerData: registerData) => {
@@ -16,7 +22,7 @@ export const userRegister = async (registerData: registerData) => {
   return data;
 };
 
-export const userLogin = async (loginData: Omit<registerData, "username">) => {
+export const userLogin = async (loginData: loginData) => {
   const { data } = await axiosInstance.post<User>("/user/login", loginData);
   return data;
 };

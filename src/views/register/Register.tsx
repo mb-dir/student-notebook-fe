@@ -18,7 +18,6 @@ const Register: FC = () => {
     register,
     handleSubmit,
     formState: { errors },
-    setError,
   } = useForm<IFormInput>();
   const onSubmit: SubmitHandler<IFormInput> = async ({
     username,
@@ -27,15 +26,11 @@ const Register: FC = () => {
     confirmPassword,
   }) => {
     try {
-      if (password !== confirmPassword) {
-        setError("passwords", {
-          message: "Passwords are not the same",
-        });
-      }
       const data = await userRegister({
         username,
         email,
         password,
+        confirmPassword,
       });
       login(data);
     } catch (error: any) {
