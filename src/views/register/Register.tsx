@@ -82,7 +82,7 @@ const Register: FC = () => {
           id="confirmPassword"
           {...register("confirmPassword", { required: true })}
         />
-        <button className="registerForm__button">Login</button>
+        <button className="registerForm__button">Register</button>
       </form>
       <div className="registerWrapper__error">
         <p>{errors.username && "Username is required"}</p>
