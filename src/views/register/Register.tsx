@@ -1,55 +1,59 @@
-import { useState, FC, ChangeEvent, FormEvent } from "react";
+import { FC } from "react";
 import { useUserContext } from "../../hooks/useUserContext";
 import { userRegister } from "../../services/user";
+import { SubmitHandler, useForm } from "react-hook-form";
 import "./styles.scss";
 
+interface IFormInput {
+  username: string;
+  email: string;
+  password: string;
+  confirmPassword: string;
+  passwords: string;
+}
+
 const Register: FC = () => {
-  const [username, setUsername] = useState<string>("");
-  const [email, setEmail] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
-  const [confirmPassword, setConfirmPassword] = useState<string>("");
-  const [error, setError] = useState<string>("");
   const { login } = useUserContext();
-
-  const resetState = () => {
-    setUsername("");
-    setEmail("");
-    setPassword("");
-    setConfirmPassword("");
-    setError("");
-  };
-
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    if (password !== confirmPassword) {
-      setError("Passwords are not the same!");
-      return;
-    }
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    setError,
+  } = useForm<IFormInput>();
+  const onSubmit: SubmitHandler<IFormInput> = async ({
+    username,
+    email,
+    password,
+    confirmPassword,
+  }) => {
     try {
-      const data = await userRegister({ username, email, password });
+      if (password !== confirmPassword) {
+        setError("passwords", {
+          message: "Passwords are not the same",
+        });
+      }
+      const data = await userRegister({
+        username,
+        email,
+        password,
+      });
       login(data);
-      resetState();
     } catch (error: any) {
-      setError(error.response.data.error);
+      console.log(error);
     }
   };
 
   return (
     <div className="registerWrapper">
       <h2 className="registerWrapper__header">Register</h2>
-      <form className="registerForm" onSubmit={handleSubmit}>
+      <form className="registerForm" onSubmit={handleSubmit(onSubmit)}>
         <label className="registerForm__label" htmlFor="username">
           name
         </label>
         <input
           className="registerForm__input"
-          name="username"
           id="username"
-          value={username}
-          required
-          onChange={(e: ChangeEvent<HTMLInputElement>) =>
-            setUsername(e.target.value)
-          }
+          {...register("username", { required: true })}
         />
         <label className="registerForm__label" htmlFor="email">
           e-mail
@@ -57,13 +61,8 @@ const Register: FC = () => {
         <input
           className="registerForm__input"
           type="email"
-          name="email"
           id="email"
-          value={email}
-          required
-          onChange={(e: ChangeEvent<HTMLInputElement>) =>
-            setEmail(e.target.value)
-          }
+          {...register("email", { required: true })}
         />
         <label className="registerForm__label" htmlFor="password">
           password
@@ -71,13 +70,8 @@ const Register: FC = () => {
         <input
           className="registerForm__input"
           type="password"
-          name="password"
           id="password"
-          value={password}
-          required
-          onChange={(e: ChangeEvent<HTMLInputElement>) =>
-            setPassword(e.target.value)
-          }
+          {...register("password", { required: true })}
         />
         <label className="registerForm__label" htmlFor="confirmPassword">
           confirm password
@@ -85,17 +79,18 @@ const Register: FC = () => {
         <input
           className="registerForm__input"
           type="password"
-          name="confirmPassword"
           id="confirmPassword"
-          required
-          value={confirmPassword}
-          onChange={(e: ChangeEvent<HTMLInputElement>) =>
-            setConfirmPassword(e.target.value)
-          }
+          {...register("confirmPassword", { required: true })}
         />
         <button className="registerForm__button">Login</button>
       </form>
-      <div className="registerWrapper__error">{error && error}</div>
+      <div className="registerWrapper__error">
+        <p>{errors.username && "Username is required"}</p>
+        <p>{errors.email && "Email is required"}</p>
+        <p>{errors.password && "Password is required"}</p>
+        <p>{errors.confirmPassword && "You need to confirm your password"}</p>
+        <p>{errors.passwords && errors.passwords.message}</p>
+      </div>
     </div>
   );
 };
