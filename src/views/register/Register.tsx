@@ -1,9 +1,11 @@
+import "./styles.scss";
+
+import { SubmitHandler, useForm } from "react-hook-form";
+
 import { FC } from "react";
+import { toast } from "react-toastify";
 import { useUserContext } from "../../hooks/useUserContext";
 import { userRegister } from "../../services/user";
-import { SubmitHandler, useForm } from "react-hook-form";
-import { toast } from "react-toastify";
-import "./styles.scss";
 
 interface IFormInput {
   username: string;

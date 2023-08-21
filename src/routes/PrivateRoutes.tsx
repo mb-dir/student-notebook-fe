@@ -1,7 +1,8 @@
-import { FC } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
-import UserDashboard from "../components/userDashboard/UserDashboard";
+
+import { FC } from "react";
 import Logout from "../components/logout/Logout";
+import UserDashboard from "../components/userDashboard/UserDashboard";
 
 export const PrivateRoutes: FC = () => {
   return (

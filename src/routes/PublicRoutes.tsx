@@ -1,5 +1,6 @@
-import { FC } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
+
+import { FC } from "react";
 import Homepage from "../views/homepage/Homepage";
 import Login from "../views/login/Login";
 import Register from "../views/register/Register";

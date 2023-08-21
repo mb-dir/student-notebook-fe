@@ -1,5 +1,5 @@
-import axiosInstance from "../axiosInstance";
 import { User } from "../context/userContext";
+import axiosInstance from "../axiosInstance";
 
 type registerData = {
   username: string;

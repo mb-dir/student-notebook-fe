@@ -1,4 +1,5 @@
-import { useEffect, FC } from "react";
+import { FC, useEffect } from "react";
+
 import { useUserContext } from "../../hooks/useUserContext";
 
 const Logout: FC = () => {

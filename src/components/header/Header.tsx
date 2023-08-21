@@ -1,8 +1,9 @@
+import "./style.scss";
+
 import { FC } from "react";
 import { Link } from "react-router-dom";
-import "./style.scss";
-import { useUserContext } from "../../hooks/useUserContext";
 import Menu from "../menu/Menu";
+import { useUserContext } from "../../hooks/useUserContext";
 
 const Header: FC = () => {
   const { user } = useUserContext();

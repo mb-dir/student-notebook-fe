@@ -1,4 +1,4 @@
-import { createContext, useState, ReactNode, FC } from "react";
+import { FC, ReactNode, createContext, useState } from "react";
 
 interface UserProviderProps {
   children: ReactNode;

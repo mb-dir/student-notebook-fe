@@ -1,9 +1,10 @@
 import "./styles.scss";
-import { Outlet } from "react-router";
+import "react-toastify/dist/ReactToastify.css";
+
 import { FC } from "react";
 import Header from "../header/Header";
+import { Outlet } from "react-router";
 import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 
 const Layout: FC = () => {
   return (
