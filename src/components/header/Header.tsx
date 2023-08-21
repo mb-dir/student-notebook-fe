@@ -3,10 +3,11 @@ import "./style.scss";
 import { FC } from "react";
 import { Link } from "react-router-dom";
 import Menu from "../menu/Menu";
+import { toast } from "react-toastify";
 import { useUserContext } from "../../hooks/useUserContext";
 
 const Header: FC = () => {
-  const { user } = useUserContext();
+  const { user, logout } = useUserContext();
   return (
     <header className="header">
       <h1 className="header__content">
@@ -15,7 +16,18 @@ const Header: FC = () => {
         </Link>
       </h1>
       {!!user ? (
-        <Menu elements={[{ path: "/logout", content: "Logout" }]} />
+        <Menu
+          elements={[
+            {
+              path: "/logout",
+              content: "Logout",
+              onClick: () => {
+                logout();
+                toast.success("Logout sucessfull");
+              },
+            },
+          ]}
+        />
       ) : (
         <Menu
           elements={[
