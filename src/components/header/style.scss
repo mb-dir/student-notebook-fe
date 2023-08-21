@@ -1,0 +1,16 @@
+@import "../layout/variables";
+.header {
+  background-color: $blue;
+  padding: 1.5rem;
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  &__content {
+    margin: 0;
+  }
+  &__link {
+    text-decoration: none;
+    color: #fff;
+  }
+}
