@@ -1,8 +1,13 @@
-import { Link } from "react-router-dom";
 import "./style.scss";
-type Props = {};
 
-const Header = (props: Props) => {
+import { FC } from "react";
+import { Link } from "react-router-dom";
+import Menu from "../menu/Menu";
+import { toast } from "react-toastify";
+import { useUserContext } from "../../hooks/useUserContext";
+
+const Header: FC = () => {
+  const { user, logout } = useUserContext();
   return (
     <header className="header">
       <h1 className="header__content">
@@ -10,20 +15,27 @@ const Header = (props: Props) => {
           Student notebook
         </Link>
       </h1>
-      <nav className="nav">
-        <ul className="menu">
-          <li className="menu__element">
-            <Link className="menu__link" to="/login">
-              Login
-            </Link>
-          </li>
-          <li className="menu__element">
-            <Link className="menu__link" to="/register">
-              Register
-            </Link>
-          </li>
-        </ul>
-      </nav>
+      {!!user ? (
+        <Menu
+          elements={[
+            {
+              path: "/logout",
+              content: "Logout",
+              onClick: () => {
+                logout();
+                toast.success("Logout sucessfull");
+              },
+            },
+          ]}
+        />
+      ) : (
+        <Menu
+          elements={[
+            { path: "/login", content: "Login" },
+            { path: "/register", content: "Register" },
+          ]}
+        />
+      )}
     </header>
   );
 };
