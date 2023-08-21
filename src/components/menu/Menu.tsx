@@ -8,11 +8,11 @@ type menuElement = {
   content: string;
 };
 
-interface MenuProps {
+interface IMenuProps {
   elements: menuElement[];
 }
 
-const Menu: FC<MenuProps> = ({ elements }: MenuProps) => {
+const Menu: FC<IMenuProps> = ({ elements }: IMenuProps) => {
   return (
     <nav className="nav">
       <ul className="menu">

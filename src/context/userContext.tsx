@@ -1,6 +1,6 @@
 import { FC, ReactNode, createContext, useState } from "react";
 
-interface UserProviderProps {
+interface IUserProviderProps {
   children: ReactNode;
 }
 
@@ -10,17 +10,17 @@ export type User = {
   email: string;
 };
 
-interface UserContextType {
+interface IUserContextType {
   user: User | null;
   login: (user: User) => void;
   logout: () => void;
 }
 
-export const UserContext = createContext<UserContextType | null>(null);
+export const UserContext = createContext<IUserContextType | null>(null);
 
-export const UserProvider: FC<UserProviderProps> = ({
+export const UserProvider: FC<IUserProviderProps> = ({
   children,
-}: UserProviderProps) => {
+}: IUserProviderProps) => {
   const [user, setUser] = useState<User | null>(() => {
     const storedUser = localStorage.getItem("user");
     const user: User = storedUser ? JSON.parse(storedUser) : null;
@@ -42,7 +42,7 @@ export const UserProvider: FC<UserProviderProps> = ({
     localStorage.removeItem("user");
   };
 
-  const contextValue: UserContextType = {
+  const contextValue: IUserContextType = {
     user,
     login,
     logout,
