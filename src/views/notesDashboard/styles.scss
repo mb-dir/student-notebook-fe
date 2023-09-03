@@ -1,0 +1,21 @@
+@import "../../components/layout/variables";
+.notesHeader {
+  margin-top: -200px;
+}
+.collapseWrapper {
+  margin-top: 50px;
+  &__buttons {
+    display: flex;
+    justify-content: space-evenly;
+    margin-bottom: 50px;
+  }
+  &__optionButton {
+    border: 2px solid $blue;
+    border-radius: 5px;
+    background-color: #fff;
+    padding: 5px 10px;
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
