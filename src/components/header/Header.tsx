@@ -19,6 +19,10 @@ const Header: FC = () => {
         <Menu
           elements={[
             {
+              path: "/notes",
+              content: "Your notes",
+            },
+            {
               path: "/logout",
               content: "Logout",
               onClick: () => {
