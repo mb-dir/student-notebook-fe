@@ -3,6 +3,7 @@ import "./styles.scss";
 import { FC, useState } from "react";
 
 import { Collapse } from "react-collapse";
+import NoteForm from "../../components/noteForm/NoteForm";
 
 const NotesDashboard: FC = () => {
   const [isAddNewNoteOpen, setIsAddNewNoteOpen] = useState<boolean>(false);
@@ -35,7 +36,9 @@ const NotesDashboard: FC = () => {
             Show all notes
           </button>
         </div>
-        <Collapse isOpened={isAddNewNoteOpen}>Add new note</Collapse>
+        <Collapse isOpened={isAddNewNoteOpen}>
+          <NoteForm />
+        </Collapse>
         <Collapse isOpened={isShowAllNotesOpen}>Show all notes</Collapse>
       </div>
     </div>
