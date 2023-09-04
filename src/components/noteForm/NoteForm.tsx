@@ -3,6 +3,8 @@ import "./styles.scss";
 import { SubmitHandler, useForm } from "react-hook-form";
 
 import { FC } from "react";
+import { addNote } from "../../services/note";
+import { toast } from "react-toastify";
 
 interface IFormInput {
   title: string;
@@ -13,12 +15,17 @@ interface IFormInput {
 const NoteForm: FC = () => {
   const { register, handleSubmit } = useForm<IFormInput>();
 
-  const onSubmit: SubmitHandler<IFormInput> = ({
+  const onSubmit: SubmitHandler<IFormInput> = async ({
     title,
     content,
     isHighPriority,
   }) => {
-    console.log(title, content, isHighPriority);
+    try {
+      await addNote({ title, content, isHighPriority });
+      toast.success("New note added");
+    } catch (error: any) {
+      toast.error(error.response.data.error);
+    }
   };
   return (
     <form className="noteForm" onSubmit={handleSubmit(onSubmit)}>
