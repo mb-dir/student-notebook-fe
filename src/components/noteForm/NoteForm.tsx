@@ -1,8 +1,8 @@
 import "./styles.scss";
 
+import { FC, useEffect } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 
-import { FC } from "react";
 import { addNote } from "../../services/note";
 import { toast } from "react-toastify";
 
@@ -13,7 +13,17 @@ interface IFormInput {
 }
 
 const NoteForm: FC = () => {
-  const { register, handleSubmit } = useForm<IFormInput>();
+  const {
+    register,
+    handleSubmit,
+    formState: { isSubmitSuccessful },
+    reset,
+  } = useForm<IFormInput>();
+  useEffect(() => {
+    if (isSubmitSuccessful) {
+      reset();
+    }
+  }, [isSubmitSuccessful, reset]);
 
   const onSubmit: SubmitHandler<IFormInput> = async ({
     title,
