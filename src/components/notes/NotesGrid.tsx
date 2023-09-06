@@ -1,6 +1,7 @@
 import { FC, useEffect, useState } from "react";
 import { NoteData, getNotes } from "../../services/note";
 
+import NoteCard from "./NoteCard";
 import { toast } from "react-toastify";
 
 const NotesGrid: FC = () => {
@@ -20,9 +21,12 @@ const NotesGrid: FC = () => {
     <div>
       {(notesData?.notes || []).map(note => {
         return (
-          <div>
-            {note.title} {note.content} {note.isHighPriority}
-          </div>
+          <NoteCard
+            key={note._id}
+            title={note.title}
+            content={note.content}
+            isHighPriority={note.isHighPriority}
+          />
         );
       })}
     </div>
