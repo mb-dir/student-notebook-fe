@@ -1,25 +1,17 @@
-import { FC, useEffect, useState } from "react";
-import { NoteData, getNotes } from "../../services/note";
-
+import { FC } from "react";
 import NoteCard from "./NoteCard";
-import { toast } from "react-toastify";
+import { NoteData } from "../../services/note";
 
-const NotesGrid: FC = () => {
-  const [notesData, setNotesData] = useState<NoteData | null>(null);
-  useEffect(() => {
-    const getAllNotes = async () => {
-      try {
-        const { data } = await getNotes();
-        setNotesData(data);
-      } catch (error: any) {
-        toast.error(error.response.data.error);
-      }
-    };
-    getAllNotes();
-  }, []);
+const NotesGrid: FC<NoteData> = ({
+  notes,
+  totalNotesCount,
+  page,
+  notesPerPage,
+  notesOnCurrentPage,
+}) => {
   return (
     <div className="notesWrapper">
-      {(notesData?.notes || []).map(note => {
+      {(notes || []).map(note => {
         return (
           <NoteCard
             key={note._id}
