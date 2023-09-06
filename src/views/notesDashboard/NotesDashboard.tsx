@@ -4,6 +4,7 @@ import { FC, useState } from "react";
 
 import { Collapse } from "react-collapse";
 import NoteForm from "../../components/noteForm/NoteForm";
+import NotesGrid from "../../components/notes/NotesGrid";
 
 const NotesDashboard: FC = () => {
   const [isAddNewNoteOpen, setIsAddNewNoteOpen] = useState<boolean>(false);
@@ -39,7 +40,9 @@ const NotesDashboard: FC = () => {
         <Collapse isOpened={isAddNewNoteOpen}>
           <NoteForm />
         </Collapse>
-        <Collapse isOpened={isShowAllNotesOpen}>Show all notes</Collapse>
+        <Collapse isOpened={isShowAllNotesOpen}>
+          <NotesGrid />
+        </Collapse>
       </div>
     </div>
   );
