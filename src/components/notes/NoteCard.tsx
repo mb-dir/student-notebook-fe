@@ -12,7 +12,9 @@ const NoteCard: FC<Omit<Note, "_id">> = ({
     <div className="noteCard">
       <h3 className="noteCard__title">{title}</h3>
       <div className="noteCard__content">{content}</div>
-      <p>Priority: {isHighPriority ? "High" : "Low"}</p>
+      <p className="noteCard__priority">
+        Priority: {isHighPriority ? "High" : "Low"}
+      </p>
     </div>
   );
 };

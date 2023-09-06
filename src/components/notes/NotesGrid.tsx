@@ -18,7 +18,7 @@ const NotesGrid: FC = () => {
     getAllNotes();
   }, []);
   return (
-    <div>
+    <div className="notesWrapper">
       {(notesData?.notes || []).map(note => {
         return (
           <NoteCard
