@@ -18,7 +18,7 @@ const NotesDashboard: FC = () => {
     setIsAddNewNoteOpen(false);
   };
   return (
-    <div>
+    <>
       <h2 className="notesHeader">
         Here you can manage all your notes and add new one as well!
       </h2>
@@ -44,7 +44,7 @@ const NotesDashboard: FC = () => {
           <NotesGrid />
         </Collapse>
       </div>
-    </div>
+    </>
   );
 };
 
