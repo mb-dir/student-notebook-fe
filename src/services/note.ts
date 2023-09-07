@@ -1,12 +1,26 @@
 import axiosInstance from "../axiosInstance";
 
-type Note = {
+export type Note = {
+  _id: string;
   title: string;
   content: string;
   isHighPriority: boolean;
 };
-export const addNote = async (noteData: Note) => {
+
+export type NoteData = {
+  notes: Note[];
+  totalNotesCount: number;
+  page: number;
+  notesPerPage: number;
+  notesOnCurrentPage: number;
+};
+export const addNote = async (noteData: Omit<Note, "_id">) => {
   const { data } = await axiosInstance.post<Note>("/notes", noteData);
 
+  return data;
+};
+
+export const getNotes = async () => {
+  const data = await axiosInstance.get<NoteData>("/notes");
   return data;
 };

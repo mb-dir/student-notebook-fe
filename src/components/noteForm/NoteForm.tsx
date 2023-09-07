@@ -1,9 +1,9 @@
 import "./styles.scss";
 
-import { FC, useEffect } from "react";
+import { Dispatch, FC, SetStateAction, useEffect } from "react";
+import { NoteData, addNote, getNotes } from "../../services/note";
 import { SubmitHandler, useForm } from "react-hook-form";
 
-import { addNote } from "../../services/note";
 import { toast } from "react-toastify";
 
 interface IFormInput {
@@ -11,8 +11,11 @@ interface IFormInput {
   content: string;
   isHighPriority: boolean;
 }
+type NoteFormProps = {
+  setNotesData: Dispatch<SetStateAction<NoteData | null>>;
+};
 
-const NoteForm: FC = () => {
+const NoteForm: FC<NoteFormProps> = ({ setNotesData }) => {
   const {
     register,
     handleSubmit,
@@ -32,6 +35,8 @@ const NoteForm: FC = () => {
   }) => {
     try {
       await addNote({ title, content, isHighPriority });
+      const { data } = await getNotes();
+      setNotesData(data);
       toast.success("New note added");
     } catch (error: any) {
       toast.error(error.response.data.error);

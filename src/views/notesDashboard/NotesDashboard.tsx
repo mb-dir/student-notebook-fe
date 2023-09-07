@@ -1,9 +1,12 @@
 import "./styles.scss";
 
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
+import { NoteData, getNotes } from "../../services/note";
 
 import { Collapse } from "react-collapse";
 import NoteForm from "../../components/noteForm/NoteForm";
+import NotesGrid from "../../components/notes/NotesGrid";
+import { toast } from "react-toastify";
 
 const NotesDashboard: FC = () => {
   const [isAddNewNoteOpen, setIsAddNewNoteOpen] = useState<boolean>(false);
@@ -16,8 +19,21 @@ const NotesDashboard: FC = () => {
     setIsShowAllNotesOpen(prev => !prev);
     setIsAddNewNoteOpen(false);
   };
+
+  const [notesData, setNotesData] = useState<NoteData | null>(null);
+  useEffect(() => {
+    const getAllNotes = async () => {
+      try {
+        const { data } = await getNotes();
+        setNotesData(data);
+      } catch (error: any) {
+        toast.error(error.response.data.error);
+      }
+    };
+    getAllNotes();
+  }, []);
   return (
-    <div>
+    <>
       <h2 className="notesHeader">
         Here you can manage all your notes and add new one as well!
       </h2>
@@ -37,11 +53,19 @@ const NotesDashboard: FC = () => {
           </button>
         </div>
         <Collapse isOpened={isAddNewNoteOpen}>
-          <NoteForm />
+          <NoteForm setNotesData={setNotesData} />
         </Collapse>
-        <Collapse isOpened={isShowAllNotesOpen}>Show all notes</Collapse>
+        <Collapse isOpened={isShowAllNotesOpen}>
+          <NotesGrid
+            notes={notesData?.notes || []}
+            totalNotesCount={notesData?.totalNotesCount || 0}
+            page={notesData?.page || 0}
+            notesPerPage={notesData?.notesPerPage || 0}
+            notesOnCurrentPage={notesData?.notesOnCurrentPage || 0}
+          />
+        </Collapse>
       </div>
-    </div>
+    </>
   );
 };
 
