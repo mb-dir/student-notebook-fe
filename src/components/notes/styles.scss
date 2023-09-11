@@ -5,18 +5,18 @@
   justify-content: center;
 }
 .noteCard {
-  border-radius: 5px;
+  border-radius: 4px;
   background-color: $blue;
   width: 70%;
   color: $light-gray;
-  padding: 15px;
-  margin: 10px;
+  padding: 16px;
+  margin: 12px;
   &__title {
     font-size: 24px;
   }
   &__content {
     border: 1px solid $light-gray;
-    border-radius: 5px;
+    border-radius: 4px;
     padding: 20px;
     height: 280px;
     overflow-y: auto;

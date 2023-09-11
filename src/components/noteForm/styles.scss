@@ -6,11 +6,11 @@
   min-height: 300px;
   width: 75%;
   margin: 0 auto;
-  padding: 15px;
+  padding: 16px;
   border: 2px solid $blue;
-  border-radius: 5px;
+  border-radius: 4px;
   &__inputWrapper {
-    margin: 10px;
+    margin: 12px;
   }
   &__label {
     display: block;
@@ -18,18 +18,18 @@
   &__input {
     border: none;
     border-bottom: 2px solid $blue;
-    padding: 5px;
+    padding: 4px;
     &:focus {
       outline: none;
       border: 1px dashed $blue;
-      border-radius: 5px;
+      border-radius: 4px;
     }
   }
   &__textarea {
     border: none;
     border: 1px solid $blue;
-    border-radius: 5px;
-    padding: 5px;
+    border-radius: 4px;
+    padding: 4px;
     width: 400px;
     height: 230px;
     resize: none;
@@ -41,11 +41,11 @@
   &__button {
     border: none;
     background-color: $blue;
-    border-radius: 5px;
+    border-radius: 4px;
     color: $white;
-    padding: 6px 12px;
+    padding: 8px 12px;
     min-width: 70px;
-    margin-top: 25px;
+    margin-top: 24px;
     &:hover {
       cursor: pointer;
     }
