@@ -1,14 +1,12 @@
 @import "../../scss/variables";
+@import "../../scss/mixins";
 .loginWrapper {
   border: 2px solid $blue;
   border-radius: 5px;
   width: 80%;
   margin: -50px auto 0;
   min-height: 400px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  @include flex-center-column;
   &__header {
     margin-top: 0;
   }
@@ -21,9 +19,7 @@
   }
 }
 .loginForm {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  @include flex-center-column;
   &__label {
     margin: 15px 0 2px;
   }
