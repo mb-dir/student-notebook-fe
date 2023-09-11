@@ -1,7 +1,7 @@
 import "./styles.scss";
 
 import { Dispatch, FC, SetStateAction, useEffect } from "react";
-import { NoteData, addNote, getNotes } from "../../services/note";
+import { NotesData, addNote, getNotes } from "../../services/note";
 import { SubmitHandler, useForm } from "react-hook-form";
 
 import { toast } from "react-toastify";
@@ -12,7 +12,7 @@ type FormInput = {
   isHighPriority: boolean;
 };
 type NoteFormProps = {
-  setNotesData: Dispatch<SetStateAction<NoteData | null>>;
+  setNotesData: Dispatch<SetStateAction<NotesData | null>>;
 };
 
 const NoteForm: FC<NoteFormProps> = ({ setNotesData }) => {

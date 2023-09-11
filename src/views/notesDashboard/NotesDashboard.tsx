@@ -1,7 +1,7 @@
 import "./styles.scss";
 
 import { FC, useEffect, useState } from "react";
-import { NoteData, getNotes } from "../../services/note";
+import { NotesData, getNotes } from "../../services/note";
 
 import { Collapse } from "react-collapse";
 import NoteForm from "../../components/noteForm/NoteForm";
@@ -20,7 +20,7 @@ const NotesDashboard: FC = () => {
     setIsAddNewNoteOpen(false);
   };
 
-  const [notesData, setNotesData] = useState<NoteData | null>(null);
+  const [notesData, setNotesData] = useState<NotesData | null>(null);
   useEffect(() => {
     const getAllNotes = async () => {
       try {
