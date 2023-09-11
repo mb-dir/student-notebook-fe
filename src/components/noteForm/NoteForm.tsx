@@ -6,11 +6,11 @@ import { SubmitHandler, useForm } from "react-hook-form";
 
 import { toast } from "react-toastify";
 
-interface IFormInput {
+type FormInput = {
   title: string;
   content: string;
   isHighPriority: boolean;
-}
+};
 type NoteFormProps = {
   setNotesData: Dispatch<SetStateAction<NoteData | null>>;
 };
@@ -21,14 +21,14 @@ const NoteForm: FC<NoteFormProps> = ({ setNotesData }) => {
     handleSubmit,
     formState: { isSubmitSuccessful },
     reset,
-  } = useForm<IFormInput>();
+  } = useForm<FormInput>();
   useEffect(() => {
     if (isSubmitSuccessful) {
       reset();
     }
   }, [isSubmitSuccessful, reset]);
 
-  const onSubmit: SubmitHandler<IFormInput> = async ({
+  const onSubmit: SubmitHandler<FormInput> = async ({
     title,
     content,
     isHighPriority,

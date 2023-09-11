@@ -1,8 +1,8 @@
 import { FC, ReactNode, createContext, useState } from "react";
 
-interface IUserProviderProps {
+type UserProviderProps = {
   children: ReactNode;
-}
+};
 
 export type User = {
   token: string;
@@ -10,17 +10,17 @@ export type User = {
   email: string;
 };
 
-interface IUserContextType {
+type UserContextType = {
   user: User | null;
   login: (user: User) => void;
   logout: () => void;
-}
+};
 
-export const UserContext = createContext<IUserContextType | null>(null);
+export const UserContext = createContext<UserContextType | null>(null);
 
-export const UserProvider: FC<IUserProviderProps> = ({
+export const UserProvider: FC<UserProviderProps> = ({
   children,
-}: IUserProviderProps) => {
+}: UserProviderProps) => {
   const [user, setUser] = useState<User | null>(() => {
     const storedUser = localStorage.getItem("user");
     const user: User = storedUser ? JSON.parse(storedUser) : null;
@@ -42,7 +42,7 @@ export const UserProvider: FC<IUserProviderProps> = ({
     localStorage.removeItem("user");
   };
 
-  const contextValue: IUserContextType = {
+  const contextValue: UserContextType = {
     user,
     login,
     logout,

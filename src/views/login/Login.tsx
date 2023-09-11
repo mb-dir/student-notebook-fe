@@ -7,16 +7,16 @@ import { toast } from "react-toastify";
 import { useUserContext } from "../../hooks/useUserContext";
 import { userLogin } from "../../services/user";
 
-interface IFormInput {
+type FormInput = {
   email: string;
   password: string;
-}
+};
 
 const Login: FC = () => {
   const { login } = useUserContext();
-  const { register, handleSubmit } = useForm<IFormInput>();
+  const { register, handleSubmit } = useForm<FormInput>();
 
-  const onSubmit: SubmitHandler<IFormInput> = async ({ email, password }) => {
+  const onSubmit: SubmitHandler<FormInput> = async ({ email, password }) => {
     try {
       const data = await userLogin({ email, password });
       login(data);
