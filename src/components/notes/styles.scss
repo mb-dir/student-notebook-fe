@@ -1,4 +1,5 @@
 @import "../../scss/variables";
+@import "../../scss/mixins";
 .notesWrapper {
   display: flex;
   flex-wrap: wrap;
@@ -18,8 +19,9 @@
     border: 1px solid $light-gray;
     border-radius: 4px;
     padding: 20px;
-    height: 280px;
+    height: 200px;
     overflow-y: auto;
+    @include scrollbars;
   }
   &__priority {
     font-size: 14px;
@@ -29,6 +31,6 @@
 
 @media (min-width: $lg) {
   .noteCard {
-    width: 30%;
+    width: 28%;
   }
 }
