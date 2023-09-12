@@ -7,7 +7,7 @@ export type Note = {
   isHighPriority: boolean;
 };
 
-export type NoteData = {
+export type NotesData = {
   notes: Note[];
   totalNotesCount: number;
   page: number;
@@ -21,6 +21,6 @@ export const addNote = async (noteData: Omit<Note, "_id">) => {
 };
 
 export const getNotes = async () => {
-  const data = await axiosInstance.get<NoteData>("/notes");
+  const data = await axiosInstance.get<NotesData>("/notes");
   return data;
 };

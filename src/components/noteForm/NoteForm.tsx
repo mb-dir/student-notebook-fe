@@ -1,18 +1,18 @@
 import "./styles.scss";
 
 import { Dispatch, FC, SetStateAction, useEffect } from "react";
-import { NoteData, addNote, getNotes } from "../../services/note";
+import { NotesData, addNote, getNotes } from "../../services/note";
 import { SubmitHandler, useForm } from "react-hook-form";
 
 import { toast } from "react-toastify";
 
-interface IFormInput {
+type FormInput = {
   title: string;
   content: string;
   isHighPriority: boolean;
-}
+};
 type NoteFormProps = {
-  setNotesData: Dispatch<SetStateAction<NoteData | null>>;
+  setNotesData: Dispatch<SetStateAction<NotesData | null>>;
 };
 
 const NoteForm: FC<NoteFormProps> = ({ setNotesData }) => {
@@ -21,14 +21,14 @@ const NoteForm: FC<NoteFormProps> = ({ setNotesData }) => {
     handleSubmit,
     formState: { isSubmitSuccessful },
     reset,
-  } = useForm<IFormInput>();
+  } = useForm<FormInput>();
   useEffect(() => {
     if (isSubmitSuccessful) {
       reset();
     }
   }, [isSubmitSuccessful, reset]);
 
-  const onSubmit: SubmitHandler<IFormInput> = async ({
+  const onSubmit: SubmitHandler<FormInput> = async ({
     title,
     content,
     isHighPriority,
