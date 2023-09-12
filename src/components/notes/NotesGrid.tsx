@@ -2,7 +2,9 @@ import { FC } from "react";
 import NoteCard from "./NoteCard";
 import { NotesData } from "../../services/note";
 
-const NotesGrid: FC<NotesData> = ({
+type NotesGridProps = NotesData;
+
+const NotesGrid: FC<NotesGridProps> = ({
   notes,
   totalNotesCount,
   page,

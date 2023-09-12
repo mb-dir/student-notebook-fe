@@ -3,11 +3,9 @@ import "./styles.scss";
 import { FC } from "react";
 import { Note } from "../../services/note";
 
-const NoteCard: FC<Omit<Note, "_id">> = ({
-  title,
-  content,
-  isHighPriority,
-}) => {
+type NoteCardProps = Omit<Note, "_id">;
+
+const NoteCard: FC<NoteCardProps> = ({ title, content, isHighPriority }) => {
   return (
     <div className="noteCard">
       <h3 className="noteCard__title">{title}</h3>
