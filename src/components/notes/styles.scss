@@ -1,25 +1,27 @@
-@import "../../components/layout/variables";
+@import "../../scss/variables";
+@import "../../scss/mixins";
 .notesWrapper {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
 }
 .noteCard {
-  border-radius: 5px;
+  border-radius: 4px;
   background-color: $blue;
   width: 70%;
-  color: aliceblue;
-  padding: 15px;
-  margin: 10px;
+  color: $light-gray;
+  padding: 16px;
+  margin: 12px;
   &__title {
     font-size: 24px;
   }
   &__content {
-    border: 1px solid aliceblue;
-    border-radius: 5px;
+    border: 1px solid $light-gray;
+    border-radius: 4px;
     padding: 20px;
-    height: 280px;
+    height: 200px;
     overflow-y: auto;
+    @include scrollbars;
   }
   &__priority {
     font-size: 14px;
@@ -29,6 +31,6 @@
 
 @media (min-width: $lg) {
   .noteCard {
-    width: 30%;
+    width: 28%;
   }
 }

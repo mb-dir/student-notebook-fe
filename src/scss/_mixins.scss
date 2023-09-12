@@ -1,0 +1,32 @@
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+@mixin mp-reset {
+  margin: 0;
+  padding: 0;
+}
+@mixin flex-center-column {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+@mixin scrollbars {
+  // For Chrome & Safari
+  &::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: $white;
+    border-radius: 4px;
+  }
+  &::-webkit-scrollbar-track {
+    background: $blue;
+  }
+
+  // Standard version (Firefox only for now)
+  scrollbar-color: $white $blue;
+}
