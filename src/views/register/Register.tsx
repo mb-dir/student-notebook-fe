@@ -41,6 +41,9 @@ const Register: FC = () => {
       toast.error(error.response.data.error);
     }
   };
+
+  console.log(errors);
+
   return (
     <div className="registerWrapper">
       <h2 className="registerWrapper__header">Register</h2>
@@ -66,7 +69,13 @@ const Register: FC = () => {
           }`}
           type="email"
           id="email"
-          {...register("email", { required: "Email field is required" })}
+          {...register("email", {
+            required: "Email field is required",
+            pattern: {
+              value: /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
+              message: "You must provide valid email",
+            },
+          })}
         />
         <p className="registerForm__error">{errors.email?.message}</p>
 
@@ -79,7 +88,13 @@ const Register: FC = () => {
           }`}
           type="password"
           id="password"
-          {...register("password", { required: "Password field is required" })}
+          {...register("password", {
+            required: "Password field is required",
+            pattern: {
+              value: /^(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9]).{6,}$/,
+              message: "You must provide strong password",
+            },
+          })}
         />
         <p className="registerForm__error">{errors.password?.message}</p>
 
@@ -94,6 +109,7 @@ const Register: FC = () => {
           id="confirmPassword"
           {...register("confirmPassword", {
             required: "Confirm password field is required",
+
             validate: (value, formValues) => {
               return value !== formValues.password
                 ? "Passwords must be the same"

@@ -38,7 +38,13 @@ const Login: FC = () => {
           e-mail
         </label>
         <input
-          {...register("email", { required: "Email field is required" })}
+          {...register("email", {
+            required: "Email field is required",
+            pattern: {
+              value: /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
+              message: "You must provide valid email",
+            },
+          })}
           className={`loginForm__input ${
             !!errors.email ? "loginForm__input--error" : ""
           }`}
@@ -51,7 +57,13 @@ const Login: FC = () => {
           password
         </label>
         <input
-          {...register("password", { required: "Password field is required" })}
+          {...register("password", {
+            required: "Password field is required",
+            pattern: {
+              value: /^(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9]).{6,}$/,
+              message: "You must provide strong password",
+            },
+          })}
           className={`loginForm__input ${
             !!errors.password ? "loginForm__input--error" : ""
           }`}
