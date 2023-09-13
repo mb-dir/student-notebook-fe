@@ -65,7 +65,7 @@ const NoteForm: FC<NoteFormProps> = ({ setNotesData }) => {
         </label>
         <textarea
           className={`noteForm__textarea ${
-            !!errors.title ? "noteForm__textarea--error" : ""
+            !!errors.content ? "noteForm__textarea--error" : ""
           }`}
           id="content"
           {...register("content", {
