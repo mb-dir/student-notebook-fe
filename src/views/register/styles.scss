@@ -18,17 +18,28 @@
 .registerForm {
   @include flex-center-column;
   &__label {
-    margin: 16px 0 4px;
+    margin: 4px 0;
   }
   &__input {
     border: none;
     border-bottom: 2px solid $blue;
     padding: 4px;
+    &--error {
+      border: 1px dashed $error-red;
+      border-radius: 4px;
+    }
     &:focus {
       outline: none;
       border: 1px dashed $blue;
       border-radius: 4px;
     }
+  }
+  &__error {
+    margin: 4px;
+    color: $error-red;
+    font-size: 12px;
+    height: 12px;
+    text-align: left;
   }
   &__button {
     border: none;
