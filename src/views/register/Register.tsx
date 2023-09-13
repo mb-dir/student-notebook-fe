@@ -42,8 +42,6 @@ const Register: FC = () => {
     }
   };
 
-  console.log(errors);
-
   return (
     <div className="registerWrapper">
       <h2 className="registerWrapper__header">Register</h2>
