@@ -19,6 +19,10 @@
     border: none;
     border-bottom: 2px solid $blue;
     padding: 4px;
+    &--error {
+      border: 1px dashed $error-red;
+      border-radius: 4px;
+    }
     &:focus {
       outline: none;
       border: 1px dashed $blue;
@@ -33,10 +37,20 @@
     width: 400px;
     height: 230px;
     resize: none;
+    &--error {
+      border: 1px dashed $error-red;
+      border-radius: 4px;
+    }
     &:focus {
       outline: none;
       border: 1px dashed $blue;
     }
+  }
+  &__error {
+    margin: 4px;
+    color: $error-red;
+    font-size: 12px;
+    height: 12px;
   }
   &__button {
     border: none;
