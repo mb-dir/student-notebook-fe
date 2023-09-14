@@ -30,3 +30,12 @@
   // Standard version (Firefox only for now)
   scrollbar-color: $white $blue;
 }
+@mixin input-focus {
+  outline: none;
+  border: 1px dashed $blue;
+  border-radius: 4px;
+}
+@mixin input-error {
+  border: 1px dashed $error-red;
+  border-radius: 4px;
+}

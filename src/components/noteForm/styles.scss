@@ -1,4 +1,5 @@
 @import "../../scss/variables";
+@import "../../scss/mixins";
 .noteForm {
   display: flex;
   flex-direction: column;
@@ -19,10 +20,11 @@
     border: none;
     border-bottom: 2px solid $blue;
     padding: 4px;
+    &--error {
+      @include input-error;
+    }
     &:focus {
-      outline: none;
-      border: 1px dashed $blue;
-      border-radius: 4px;
+      @include input-focus;
     }
   }
   &__textarea {
@@ -33,10 +35,18 @@
     width: 400px;
     height: 230px;
     resize: none;
-    &:focus {
-      outline: none;
-      border: 1px dashed $blue;
+    &--error {
+      @include input-error;
     }
+    &:focus {
+      @include input-focus;
+    }
+  }
+  &__error {
+    margin: 4px;
+    color: $error-red;
+    font-size: 12px;
+    height: 12px;
   }
   &__button {
     border: none;

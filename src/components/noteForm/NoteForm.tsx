@@ -19,7 +19,7 @@ const NoteForm: FC<NoteFormProps> = ({ setNotesData }) => {
   const {
     register,
     handleSubmit,
-    formState: { isSubmitSuccessful },
+    formState: { isSubmitSuccessful, errors },
     reset,
   } = useForm<FormInput>();
   useEffect(() => {
@@ -48,17 +48,31 @@ const NoteForm: FC<NoteFormProps> = ({ setNotesData }) => {
         <label className="noteForm__label" htmlFor="title">
           Title
         </label>
-        <input className="noteForm__input" id="title" {...register("title")} />
+        <input
+          className={`noteForm__input ${
+            !!errors.title ? "noteForm__input--error" : ""
+          }`}
+          id="title"
+          {...register("title", {
+            required: "Title field is required",
+          })}
+        />
+        <p className="noteForm__error">{errors.title?.message}</p>
       </div>
       <div className="noteForm__inputWrapper">
         <label className="noteForm__label" htmlFor="content">
           Content
         </label>
         <textarea
-          className="noteForm__textarea"
+          className={`noteForm__textarea ${
+            !!errors.content ? "noteForm__textarea--error" : ""
+          }`}
           id="content"
-          {...register("content")}
+          {...register("content", {
+            required: "Content field is required",
+          })}
         />
+        <p className="noteForm__error">{errors.content?.message}</p>
       </div>
       <div className="noteForm__inputWrapper">
         <label className="noteForm__label" htmlFor="isHighPriority">

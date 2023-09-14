@@ -14,7 +14,11 @@ type FormInput = {
 
 const Login: FC = () => {
   const { login } = useUserContext();
-  const { register, handleSubmit } = useForm<FormInput>();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormInput>();
 
   const onSubmit: SubmitHandler<FormInput> = async ({ email, password }) => {
     try {
@@ -34,21 +38,39 @@ const Login: FC = () => {
           e-mail
         </label>
         <input
-          {...register("email")}
-          className="loginForm__input"
+          {...register("email", {
+            required: "Email field is required",
+            pattern: {
+              value: /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
+              message: "You must provide valid email",
+            },
+          })}
+          className={`loginForm__input ${
+            !!errors.email ? "loginForm__input--error" : ""
+          }`}
           type="email"
           id="email"
         />
+        <p className="loginForm__error">{errors.email?.message}</p>
 
         <label className="loginForm__label" htmlFor="password">
           password
         </label>
         <input
-          {...register("password")}
-          className="loginForm__input"
+          {...register("password", {
+            required: "Password field is required",
+            pattern: {
+              value: /^(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9]).{6,}$/,
+              message: "You must provide strong password",
+            },
+          })}
+          className={`loginForm__input ${
+            !!errors.password ? "loginForm__input--error" : ""
+          }`}
           type="password"
           id="password"
         />
+        <p className="loginForm__error">{errors.password?.message}</p>
         <button className="loginForm__button">Login</button>
       </form>
     </div>

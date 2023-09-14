@@ -27,11 +27,18 @@
     border: none;
     border-bottom: 2px solid $blue;
     padding: 4px;
-    &:focus {
-      outline: none;
-      border: 1px dashed $blue;
-      border-radius: 4px;
+    &--error {
+      @include input-error;
     }
+    &:focus {
+      @include input-focus;
+    }
+  }
+  &__error {
+    margin: 4px;
+    color: $error-red;
+    font-size: 12px;
+    height: 12px;
   }
   &__button {
     border: none;
