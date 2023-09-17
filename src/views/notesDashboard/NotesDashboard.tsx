@@ -6,11 +6,14 @@ import { NotesData, getNotes } from "../../services/note";
 import { Collapse } from "react-collapse";
 import NoteForm from "../../components/noteForm/NoteForm";
 import NotesGrid from "../../components/notes/NotesGrid";
+import Pagination from "../../components/pagination/Pagination";
 import { toast } from "react-toastify";
 
 const NotesDashboard: FC = () => {
   const [isAddNewNoteOpen, setIsAddNewNoteOpen] = useState<boolean>(false);
   const [isShowAllNotesOpen, setIsShowAllNotesOpen] = useState<boolean>(false);
+  const [paginationPage, setPaginationPage] = useState<number>(1);
+
   const onAddNewNoteClick = () => {
     setIsAddNewNoteOpen(prev => !prev);
     setIsShowAllNotesOpen(false);
@@ -32,6 +35,7 @@ const NotesDashboard: FC = () => {
     };
     getAllNotes();
   }, []);
+
   return (
     <>
       <h2 className="notesHeader">
@@ -57,6 +61,12 @@ const NotesDashboard: FC = () => {
         </Collapse>
         <Collapse isOpened={isShowAllNotesOpen}>
           <NotesGrid notes={notesData?.notes || []} />
+          <Pagination
+            page={paginationPage}
+            setPaginationPage={setPaginationPage}
+            totalNotesCount={notesData?.totalNotesCount || 1}
+            notesPerPage={notesData?.notesPerPage || 1}
+          />
         </Collapse>
       </div>
     </>
