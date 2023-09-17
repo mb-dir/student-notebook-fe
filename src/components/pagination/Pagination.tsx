@@ -1,3 +1,5 @@
+import "./styles.scss";
+
 import { Dispatch, FC, SetStateAction } from "react";
 
 type PaginationProps = {
@@ -21,7 +23,7 @@ const Pagination: FC<PaginationProps> = ({
         key={i}
         onClick={() => setPaginationPage(i)}
         className={`paginationWrapper__button ${
-          page === 1 ? "paginationWrapper__button--active" : ""
+          page === i ? "paginationWrapper__button--active" : ""
         }`}
       >
         {i}
