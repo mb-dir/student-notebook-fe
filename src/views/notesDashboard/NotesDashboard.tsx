@@ -56,13 +56,7 @@ const NotesDashboard: FC = () => {
           <NoteForm setNotesData={setNotesData} />
         </Collapse>
         <Collapse isOpened={isShowAllNotesOpen}>
-          <NotesGrid
-            notes={notesData?.notes || []}
-            totalNotesCount={notesData?.totalNotesCount || 0}
-            page={notesData?.page || 0}
-            notesPerPage={notesData?.notesPerPage || 0}
-            notesOnCurrentPage={notesData?.notesOnCurrentPage || 0}
-          />
+          <NotesGrid notes={notesData?.notes || []} />
         </Collapse>
       </div>
     </>
