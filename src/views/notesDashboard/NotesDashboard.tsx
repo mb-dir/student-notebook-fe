@@ -60,13 +60,19 @@ const NotesDashboard: FC = () => {
           <NoteForm setNotesData={setNotesData} />
         </Collapse>
         <Collapse isOpened={isShowAllNotesOpen}>
-          <NotesGrid notes={notesData?.notes || []} />
-          <Pagination
-            page={paginationPage}
-            setPaginationPage={setPaginationPage}
-            totalNotesCount={notesData?.totalNotesCount || 1}
-            notesPerPage={notesData?.notesPerPage || 1}
-          />
+          {!!notesData?.notes.length ? (
+            <>
+              <NotesGrid notes={notesData?.notes || []} />
+              <Pagination
+                page={paginationPage}
+                setPaginationPage={setPaginationPage}
+                totalNotesCount={notesData?.totalNotesCount || 1}
+                notesPerPage={notesData?.notesPerPage || 1}
+              />
+            </>
+          ) : (
+            <div>No notes yet</div>
+          )}
         </Collapse>
       </div>
     </>
