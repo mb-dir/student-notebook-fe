@@ -27,14 +27,14 @@ const NotesDashboard: FC = () => {
   useEffect(() => {
     const getAllNotes = async () => {
       try {
-        const { data } = await getNotes();
+        const { data } = await getNotes({ page: paginationPage });
         setNotesData(data);
       } catch (error: any) {
         toast.error(error.response.data.error);
       }
     };
     getAllNotes();
-  }, []);
+  }, [paginationPage]);
 
   return (
     <>
