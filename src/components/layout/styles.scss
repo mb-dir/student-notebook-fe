@@ -3,6 +3,9 @@
 .ReactCollapse--collapse {
   transition: height 750ms;
 }
+* {
+  scroll-behavior: smooth;
+}
 body {
   @include mp-reset;
   box-sizing: border-box;

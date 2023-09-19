@@ -22,14 +22,17 @@ const Pagination: FC<PaginationProps> = ({
   const paginationButtonsAmount = Math.ceil(totalNotesCount / notesPerPage);
   const buttons = [];
 
+  const handlePaginationClick = (i: number) => {
+    setPaginationPage(i);
+    window.scrollTo({ top: 0 });
+    navigate(`/notes?page=${i}`);
+  };
+
   for (let i = 1; i <= paginationButtonsAmount; i++) {
     buttons.push(
       <button
         key={i}
-        onClick={() => {
-          setPaginationPage(i);
-          navigate(`/notes?page=${i}`);
-        }}
+        onClick={() => handlePaginationClick(i)}
         className={`paginationWrapper__button ${
           page === i ? "paginationWrapper__button--active" : ""
         }`}
@@ -38,6 +41,7 @@ const Pagination: FC<PaginationProps> = ({
       </button>
     );
   }
+
   return <div className="paginationWrapper">{buttons}</div>;
 };
 
