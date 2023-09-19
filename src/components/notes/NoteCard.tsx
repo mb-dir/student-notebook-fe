@@ -15,7 +15,9 @@ const NoteCard: FC<NoteCardProps> = ({
   return (
     <div className="noteCard">
       <h3 className="noteCard__title">
-        <Link to={`${_id}`}>{title}</Link>
+        <Link className="noteCard__link" to={`${_id}`}>
+          {title}
+        </Link>
       </h3>
       <div className="noteCard__content">{content}</div>
       <p className="noteCard__priority">

@@ -15,6 +15,9 @@
   &__title {
     font-size: 24px;
   }
+  &__link {
+    @include link;
+  }
   &__content {
     border: 1px solid $light-gray;
     border-radius: 4px;

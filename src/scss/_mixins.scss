@@ -40,3 +40,7 @@
   border: 1px dashed $error-red;
   border-radius: 4px;
 }
+@mixin link {
+  text-decoration: none;
+  color: $white;
+}
