@@ -5,6 +5,7 @@
 }
 * {
   scroll-behavior: smooth;
+  @include scrollbars;
 }
 body {
   @include mp-reset;

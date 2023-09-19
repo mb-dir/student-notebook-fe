@@ -21,7 +21,6 @@
     padding: 20px;
     height: 200px;
     overflow-y: auto;
-    @include scrollbars;
   }
   &__priority {
     font-size: 14px;
