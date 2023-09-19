@@ -1,0 +1,22 @@
+@import "../../scss/variables";
+@import "../../scss/mixins";
+
+.paginationWrapper {
+  margin: 32px;
+  &__button {
+    padding: 8px 12px;
+    margin: 8px 12px;
+    border: none;
+    border: 1px solid $blue;
+    border-radius: 4px;
+    background-color: $white;
+    color: $blue;
+    &:hover {
+      cursor: pointer;
+    }
+    &--active {
+      background-color: $blue;
+      color: $white;
+    }
+  }
+}

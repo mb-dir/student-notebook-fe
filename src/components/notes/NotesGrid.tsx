@@ -1,16 +1,10 @@
 import { FC } from "react";
+import { Note } from "../../services/note";
 import NoteCard from "./NoteCard";
-import { NotesData } from "../../services/note";
 
-type NotesGridProps = NotesData;
+type NotesGridProps = { notes: Note[] };
 
-const NotesGrid: FC<NotesGridProps> = ({
-  notes,
-  totalNotesCount,
-  page,
-  notesPerPage,
-  notesOnCurrentPage,
-}) => {
+const NotesGrid: FC<NotesGridProps> = ({ notes }) => {
   return (
     <div className="notesWrapper">
       {(notes || []).map(note => {
