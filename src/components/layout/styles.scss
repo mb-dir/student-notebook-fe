@@ -1,6 +1,14 @@
+@import "../../scss//mixins";
+// https://github.com/nkbt/react-collapse#1-add-a-css-transition
+.ReactCollapse--collapse {
+  transition: height 750ms;
+}
+* {
+  scroll-behavior: smooth;
+  @include scrollbars;
+}
 body {
-  margin: 0;
-  padding: 0;
+  @include mp-reset;
   box-sizing: border-box;
   text-align: center;
 }
@@ -9,9 +17,6 @@ body {
   &__content {
     padding: 20px;
     min-height: 80vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    @include flex-center-column;
   }
 }

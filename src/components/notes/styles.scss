@@ -1,0 +1,35 @@
+@import "../../scss/variables";
+@import "../../scss/mixins";
+.notesWrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.noteCard {
+  border-radius: 4px;
+  background-color: $blue;
+  width: 70%;
+  color: $light-gray;
+  padding: 16px;
+  margin: 12px;
+  &__title {
+    font-size: 24px;
+  }
+  &__content {
+    border: 1px solid $light-gray;
+    border-radius: 4px;
+    padding: 20px;
+    height: 200px;
+    overflow-y: auto;
+  }
+  &__priority {
+    font-size: 14px;
+  }
+}
+// media-queries
+
+@media (min-width: $lg) {
+  .noteCard {
+    width: 28%;
+  }
+}

@@ -1,8 +1,8 @@
-@import "../layout/variables";
+@import "../../scss/variables";
 .header {
   background-color: $blue;
   padding: 1.5rem;
-  color: #fff;
+  color: $white;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -11,6 +11,6 @@
   }
   &__link {
     text-decoration: none;
-    color: #fff;
+    color: $white;
   }
 }

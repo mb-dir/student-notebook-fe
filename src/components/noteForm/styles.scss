@@ -1,32 +1,40 @@
 @import "../../scss/variables";
 @import "../../scss/mixins";
-.loginWrapper {
+.noteForm {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  min-height: 300px;
+  width: 75%;
+  margin: 0 auto;
+  padding: 16px;
   border: 2px solid $blue;
   border-radius: 4px;
-  width: 80%;
-  margin: -52px auto 0;
-  min-height: 400px;
-  @include flex-center-column;
-  &__header {
-    margin-top: 0;
+  &__inputWrapper {
+    margin: 12px;
   }
-  &__error {
-    width: 100%;
-    min-height: 20px;
-    padding: 4px;
-    color: $error-red;
-    margin-top: 12px;
-  }
-}
-.loginForm {
-  @include flex-center-column;
   &__label {
-    margin: 16px 0 2px;
+    display: block;
   }
   &__input {
     border: none;
     border-bottom: 2px solid $blue;
     padding: 4px;
+    &--error {
+      @include input-error;
+    }
+    &:focus {
+      @include input-focus;
+    }
+  }
+  &__textarea {
+    border: none;
+    border: 1px solid $blue;
+    border-radius: 4px;
+    padding: 4px;
+    width: 400px;
+    height: 230px;
+    resize: none;
     &--error {
       @include input-error;
     }
@@ -56,14 +64,8 @@
 
 // media-queries
 
-@media (min-width: $md) {
-  .loginWrapper {
+@media (min-width: $lg) {
+  .noteForm {
     width: 50%;
-  }
-}
-
-@media (min-width: $xl) {
-  .loginWrapper {
-    width: 30%;
   }
 }

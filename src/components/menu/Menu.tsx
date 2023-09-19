@@ -9,11 +9,11 @@ type menuElement = {
   onClick?: () => void;
 };
 
-interface IMenuProps {
+type MenuProps = {
   elements: menuElement[];
-}
+};
 
-const Menu: FC<IMenuProps> = ({ elements }: IMenuProps) => {
+const Menu: FC<MenuProps> = ({ elements }: MenuProps) => {
   return (
     <nav className="nav">
       <ul className="menu">
