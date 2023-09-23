@@ -23,7 +23,7 @@ export const addNote = async (noteData: Omit<Note, "_id">) => {
 };
 
 export const getNotes = async (params?: getNotesParams) => {
-  const data = await axiosInstance.get<NotesData>("/notes", { params });
+  const { data } = await axiosInstance.get<NotesData>("/notes", { params });
   return data;
 };
 
