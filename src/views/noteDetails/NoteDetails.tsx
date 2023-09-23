@@ -32,9 +32,9 @@ const NoteDetails: FC = () => {
 
   return (
     // React Quill here
-    <div className="noteWrapper">
+    <div>
       {noteData ? (
-        <>
+        <div className="noteWrapper">
           <h2>{noteData.title}</h2>
           <p>{noteData.content}</p>
           <p>Priority: {noteData.isHighPriority ? "High" : "Low"}</p>
@@ -44,7 +44,7 @@ const NoteDetails: FC = () => {
           >
             Back to notes dashboard
           </button>
-        </>
+        </div>
       ) : (
         <p>Loading...</p>
       )}
