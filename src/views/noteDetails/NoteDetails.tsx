@@ -4,11 +4,13 @@ import { FC, useEffect, useState } from "react";
 import { Note, getNote } from "../../services/note";
 
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router";
 import { useParams } from "react-router";
 
 const NoteDetails: FC = () => {
   const { noteId } = useParams();
   const [noteData, setNoteData] = useState<Note | null>(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const getSingleNote = async () => {
@@ -36,6 +38,12 @@ const NoteDetails: FC = () => {
           <h2>{noteData.title}</h2>
           <p>{noteData.content}</p>
           <p>Priority: {noteData.isHighPriority ? "High" : "Low"}</p>
+          <button
+            className="noteWrapper__button"
+            onClick={() => navigate("/notes")}
+          >
+            Back to notes dashboard
+          </button>
         </>
       ) : (
         <p>Loading...</p>
