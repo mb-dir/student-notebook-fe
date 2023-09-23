@@ -26,3 +26,9 @@ export const getNotes = async (params?: getNotesParams) => {
   const data = await axiosInstance.get<NotesData>("/notes", { params });
   return data;
 };
+
+export const getNote = async (_id: string) => {
+  const { data } = await axiosInstance.get<Note>(`/notes/${_id}`);
+
+  return data;
+};
