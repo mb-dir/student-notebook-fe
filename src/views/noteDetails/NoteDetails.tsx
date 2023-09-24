@@ -35,11 +35,17 @@ const NoteDetails: FC = () => {
     <div>
       {noteData ? (
         <div className="noteWrapper">
+          <button
+            className="noteWrapper__deleteButton"
+            onClick={() => setIsModalOpen(prev => !prev)}
+          >
+            Delete
+          </button>
           <h2>{noteData.title}</h2>
           <p>{noteData.content}</p>
           <p>Priority: {noteData.isHighPriority ? "High" : "Low"}</p>
           <button
-            className="noteWrapper__button"
+            className="noteWrapper__backButton"
             onClick={() => navigate("/notes")}
           >
             Back to notes dashboard
