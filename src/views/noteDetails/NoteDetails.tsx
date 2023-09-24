@@ -3,6 +3,8 @@ import "./styles.scss";
 import { FC, useEffect, useState } from "react";
 import { Note, getNote } from "../../services/note";
 
+import ConfirmPopup from "../../components/confirmPopup/ConfirmPopup";
+import Modal from "../../components/modal/Modal";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router";
 import { useParams } from "react-router";
@@ -10,6 +12,7 @@ import { useParams } from "react-router";
 const NoteDetails: FC = () => {
   const { noteId } = useParams();
   const [noteData, setNoteData] = useState<Note | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -31,8 +34,15 @@ const NoteDetails: FC = () => {
   }, [noteId]);
 
   return (
-    // React Quill here
     <div>
+      {isModalOpen && (
+        <Modal onClose={() => setIsModalOpen(false)}>
+          <ConfirmPopup
+            onConfirm={() => console.log("note deletes logic")}
+            onReject={() => setIsModalOpen(false)}
+          />
+        </Modal>
+      )}
       {noteData ? (
         <div className="noteWrapper">
           <button
