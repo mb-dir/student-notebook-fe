@@ -11,6 +11,7 @@ const NotesGrid: FC<NotesGridProps> = ({ notes }) => {
         return (
           <NoteCard
             key={note._id}
+            _id={note._id}
             title={note.title}
             content={note.content}
             isHighPriority={note.isHighPriority}

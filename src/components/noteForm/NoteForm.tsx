@@ -35,7 +35,7 @@ const NoteForm: FC<NoteFormProps> = ({ setNotesData }) => {
   }) => {
     try {
       await addNote({ title, content, isHighPriority });
-      const { data } = await getNotes();
+      const data = await getNotes();
       setNotesData(data);
       toast.success("New note added");
     } catch (error: any) {
