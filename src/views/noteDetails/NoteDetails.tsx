@@ -1,7 +1,7 @@
 import "./styles.scss";
 
 import { FC, useEffect, useState } from "react";
-import { Note, getNote } from "../../services/note";
+import { Note, deleteNote, getNote } from "../../services/note";
 
 import ConfirmPopup from "../../components/confirmPopup/ConfirmPopup";
 import Modal from "../../components/modal/Modal";
@@ -33,12 +33,28 @@ const NoteDetails: FC = () => {
     getSingleNote();
   }, [noteId]);
 
+  const handleNoteDelete = async () => {
+    try {
+      if (!noteId) {
+        toast.error(
+          "An issue has occurred; please attempt the action again or get in touch with the administrator for assistance."
+        );
+        return;
+      }
+      await deleteNote(noteId);
+      toast.success("Note was deleted");
+      navigate("/notes");
+    } catch (error: any) {
+      toast.error(error.response.data.error);
+    }
+  };
+
   return (
     <div>
       {isModalOpen && (
         <Modal onClose={() => setIsModalOpen(false)}>
           <ConfirmPopup
-            onConfirm={() => console.log("note deletes logic")}
+            onConfirm={handleNoteDelete}
             onReject={() => setIsModalOpen(false)}
           />
         </Modal>

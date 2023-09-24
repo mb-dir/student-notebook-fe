@@ -18,7 +18,6 @@ export type NotesData = {
 };
 export const addNote = async (noteData: Omit<Note, "_id">) => {
   const { data } = await axiosInstance.post<Note>("/notes", noteData);
-
   return data;
 };
 
@@ -29,6 +28,10 @@ export const getNotes = async (params?: getNotesParams) => {
 
 export const getNote = async (_id: string) => {
   const { data } = await axiosInstance.get<Note>(`/notes/${_id}`);
+  return data;
+};
 
+export const deleteNote = async (_id: string) => {
+  const { data } = await axiosInstance.delete<Note>(`/notes/${_id}`);
   return data;
 };
