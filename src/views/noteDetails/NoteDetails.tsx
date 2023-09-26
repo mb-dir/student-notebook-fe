@@ -62,10 +62,13 @@ const NoteDetails: FC = () => {
       {noteData ? (
         <div className="noteWrapper">
           <button
-            className="noteWrapper__deleteButton"
+            className="noteWrapper__button noteWrapper__button--delete"
             onClick={() => setIsModalOpen(prev => !prev)}
           >
             Delete
+          </button>
+          <button className="noteWrapper__button noteWrapper__button--edit">
+            Edit
           </button>
           <h2>{noteData.title}</h2>
           <p>{noteData.content}</p>
