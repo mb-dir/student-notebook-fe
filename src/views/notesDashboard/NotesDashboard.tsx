@@ -22,6 +22,7 @@ const NotesDashboard: FC = () => {
   const onAddNewNoteClick = () => {
     setIsAddNewNoteOpen(prev => !prev);
     setIsShowAllNotesOpen(false);
+    navigate("/notes");
   };
   const onShowAllNotesClick = () => {
     setIsShowAllNotesOpen(prev => !prev);
