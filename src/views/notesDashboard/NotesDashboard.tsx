@@ -62,12 +62,12 @@ const NotesDashboard: FC = () => {
         <Collapse isOpened={isShowAllNotesOpen}>
           {!!notesData?.notes.length ? (
             <>
-              <NotesGrid notes={notesData?.notes || []} />
+              <NotesGrid notes={notesData.notes} />
               <Pagination
                 page={paginationPage}
                 setPaginationPage={setPaginationPage}
-                totalNotesCount={notesData?.totalNotesCount || 1}
-                notesPerPage={notesData?.notesPerPage || 1}
+                totalNotesCount={notesData.totalNotesCount}
+                notesPerPage={notesData.notesPerPage}
               />
             </>
           ) : (
