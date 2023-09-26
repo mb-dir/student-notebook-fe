@@ -86,11 +86,17 @@ const NoteDetails: FC = () => {
           >
             Edit
           </button>
+          <button
+            className="noteWrapper__button noteWrapper__button--back"
+            onClick={() => navigate("/notes")}
+          >
+            Back to notes dashboard
+          </button>
           <h2>{noteData.title}</h2>
           <p>{noteData.content}</p>
           <p>Priority: {noteData.isHighPriority ? "High" : "Low"}</p>
           <button
-            className="noteWrapper__backButton"
+            className="noteWrapper__button noteWrapper__button--back"
             onClick={() => navigate("/notes")}
           >
             Back to notes dashboard

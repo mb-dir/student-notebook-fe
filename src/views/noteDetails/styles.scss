@@ -8,7 +8,7 @@
     border-radius: 4px;
     color: $light-gray;
     padding: 8px 16px;
-    margin: 8px;
+    margin-right: 16px;
     &--delete {
       background-color: $error-red;
       margin-left: 0;
@@ -16,16 +16,10 @@
     &--edit {
       background-color: $blue;
     }
-    &:hover {
-      cursor: pointer;
+    &--back {
+      background-color: $blue;
+      color: $light-gray;
     }
-  }
-  &__backButton {
-    border: none;
-    border-radius: 4px;
-    background-color: $blue;
-    color: $light-gray;
-    padding: 8px 16px;
     &:hover {
       cursor: pointer;
     }
