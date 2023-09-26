@@ -52,7 +52,7 @@ const NoteDetails: FC = () => {
   };
 
   return (
-    <div>
+    <>
       {isDeleteModalOpen && (
         <Modal onClose={() => setIsDeleteModalOpen(false)}>
           <ConfirmPopup
@@ -99,7 +99,7 @@ const NoteDetails: FC = () => {
       ) : (
         <p>Loading...</p>
       )}
-    </div>
+    </>
   );
 };
 
