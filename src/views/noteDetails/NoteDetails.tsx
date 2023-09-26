@@ -1,8 +1,10 @@
 import "./styles.scss";
 
 import { FC, useEffect, useState } from "react";
-import { Note, getNote } from "../../services/note";
+import { Note, deleteNote, getNote } from "../../services/note";
 
+import ConfirmPopup from "../../components/confirmPopup/ConfirmPopup";
+import Modal from "../../components/modal/Modal";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router";
 import { useParams } from "react-router";
@@ -10,6 +12,7 @@ import { useParams } from "react-router";
 const NoteDetails: FC = () => {
   const { noteId } = useParams();
   const [noteData, setNoteData] = useState<Note | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -30,16 +33,45 @@ const NoteDetails: FC = () => {
     getSingleNote();
   }, [noteId]);
 
+  const handleNoteDelete = async () => {
+    try {
+      if (!noteId) {
+        toast.error(
+          "An issue has occurred; please attempt the action again or get in touch with the administrator for assistance."
+        );
+        return;
+      }
+      await deleteNote(noteId);
+      toast.success("Note was deleted");
+      navigate("/notes");
+    } catch (error: any) {
+      toast.error(error.response.data.error);
+    }
+  };
+
   return (
-    // React Quill here
     <div>
+      {isModalOpen && (
+        <Modal onClose={() => setIsModalOpen(false)}>
+          <ConfirmPopup
+            onConfirm={handleNoteDelete}
+            onReject={() => setIsModalOpen(false)}
+          />
+        </Modal>
+      )}
       {noteData ? (
         <div className="noteWrapper">
+          <button
+            className="noteWrapper__deleteButton"
+            onClick={() => setIsModalOpen(prev => !prev)}
+          >
+            Delete
+          </button>
           <h2>{noteData.title}</h2>
           <p>{noteData.content}</p>
           <p>Priority: {noteData.isHighPriority ? "High" : "Low"}</p>
           <button
-            className="noteWrapper__button"
+            className="noteWrapper__backButton"
             onClick={() => navigate("/notes")}
           >
             Back to notes dashboard

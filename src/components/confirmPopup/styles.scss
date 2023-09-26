@@ -1,0 +1,25 @@
+@import "../../scss/variables";
+@import "../../scss/mixins";
+.confirmPopup {
+  background-color: $blue;
+  max-width: 354px;
+  padding: 32px;
+  border-radius: 8px;
+  &__button {
+    border: 0;
+    border-radius: 8px;
+    background-color: $error-red;
+    padding: 4px 12px;
+    margin: 4px;
+    color: $white;
+    &--confirm {
+      background-color: $green;
+    }
+    &--reject {
+      background-color: $error-red;
+    }
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
