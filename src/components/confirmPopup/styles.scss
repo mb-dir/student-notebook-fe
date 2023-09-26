@@ -5,24 +5,19 @@
   max-width: 354px;
   padding: 32px;
   border-radius: 8px;
-  &__confirm {
-    border: 0;
-    border-radius: 8px;
-    background-color: $green;
-    padding: 4px 12px;
-    margin: 4px;
-    color: $white;
-    &:hover {
-      cursor: pointer;
-    }
-  }
-  &__reject {
+  &__button {
     border: 0;
     border-radius: 8px;
     background-color: $error-red;
     padding: 4px 12px;
     margin: 4px;
     color: $white;
+    &--confirm {
+      background-color: $green;
+    }
+    &--reject {
+      background-color: $error-red;
+    }
     &:hover {
       cursor: pointer;
     }
