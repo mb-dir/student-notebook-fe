@@ -2,6 +2,7 @@ import "./styles.scss";
 
 import { FC, useEffect, useState } from "react";
 import { NotesData, getNotes } from "../../services/note";
+import { useLocation, useNavigate } from "react-router";
 
 import { Collapse } from "react-collapse";
 import NoteForm from "../../components/noteForm/NoteForm";
@@ -10,10 +11,14 @@ import Pagination from "../../components/pagination/Pagination";
 import { toast } from "react-toastify";
 
 const NotesDashboard: FC = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
+  const page = location.state?.page;
   const [isAddNewNoteOpen, setIsAddNewNoteOpen] = useState<boolean>(false);
-  const [isShowAllNotesOpen, setIsShowAllNotesOpen] = useState<boolean>(false);
-  const [paginationPage, setPaginationPage] = useState<number>(1);
-
+  const [isShowAllNotesOpen, setIsShowAllNotesOpen] = useState<boolean>(
+    page ? true : false
+  );
+  const [paginationPage, setPaginationPage] = useState<number>(page || 1);
   const onAddNewNoteClick = () => {
     setIsAddNewNoteOpen(prev => !prev);
     setIsShowAllNotesOpen(false);
@@ -21,6 +26,8 @@ const NotesDashboard: FC = () => {
   const onShowAllNotesClick = () => {
     setIsShowAllNotesOpen(prev => !prev);
     setIsAddNewNoteOpen(false);
+    // To keep the convention of URL
+    if (!page) navigate("/notes?page=1");
   };
 
   const [notesData, setNotesData] = useState<NotesData | null>(null);
