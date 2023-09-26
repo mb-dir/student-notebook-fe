@@ -5,6 +5,7 @@ import { Note, deleteNote, getNote } from "../../services/note";
 
 import ConfirmPopup from "../../components/confirmPopup/ConfirmPopup";
 import Modal from "../../components/modal/Modal";
+import NoteEditForm from "../../components/noteEditForm/NoteEditForm";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router";
 import { useParams } from "react-router";
@@ -13,6 +14,7 @@ const NoteDetails: FC = () => {
   const { noteId } = useParams();
   const [noteData, setNoteData] = useState<Note | null>(null);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState<boolean>(false);
+  const [isEditModalOpen, setIsEditModalOpen] = useState<boolean>(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -59,6 +61,17 @@ const NoteDetails: FC = () => {
           />
         </Modal>
       )}
+      {isEditModalOpen && noteData && (
+        <Modal onClose={() => setIsEditModalOpen(false)}>
+          <NoteEditForm
+            title={noteData.title}
+            content={noteData.content}
+            isHighPriority={noteData.isHighPriority}
+            _id={noteData._id}
+            onDiscard={() => setIsEditModalOpen(false)}
+          />
+        </Modal>
+      )}
       {noteData ? (
         <div className="noteWrapper">
           <button
@@ -67,7 +80,10 @@ const NoteDetails: FC = () => {
           >
             Delete
           </button>
-          <button className="noteWrapper__button noteWrapper__button--edit">
+          <button
+            className="noteWrapper__button noteWrapper__button--edit"
+            onClick={() => setIsEditModalOpen(prev => !prev)}
+          >
             Edit
           </button>
           <h2>{noteData.title}</h2>
