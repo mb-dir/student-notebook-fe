@@ -12,7 +12,7 @@ import { useParams } from "react-router";
 const NoteDetails: FC = () => {
   const { noteId } = useParams();
   const [noteData, setNoteData] = useState<Note | null>(null);
-  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState<boolean>(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -51,11 +51,11 @@ const NoteDetails: FC = () => {
 
   return (
     <div>
-      {isModalOpen && (
-        <Modal onClose={() => setIsModalOpen(false)}>
+      {isDeleteModalOpen && (
+        <Modal onClose={() => setIsDeleteModalOpen(false)}>
           <ConfirmPopup
             onConfirm={handleNoteDelete}
-            onReject={() => setIsModalOpen(false)}
+            onReject={() => setIsDeleteModalOpen(false)}
           />
         </Modal>
       )}
@@ -63,7 +63,7 @@ const NoteDetails: FC = () => {
         <div className="noteWrapper">
           <button
             className="noteWrapper__button noteWrapper__button--delete"
-            onClick={() => setIsModalOpen(prev => !prev)}
+            onClick={() => setIsDeleteModalOpen(prev => !prev)}
           >
             Delete
           </button>
