@@ -69,6 +69,7 @@ const NoteDetails: FC = () => {
             isHighPriority={noteData.isHighPriority}
             _id={noteData._id}
             onDiscard={() => setIsEditModalOpen(false)}
+            setNoteData={setNoteData}
           />
         </Modal>
       )}

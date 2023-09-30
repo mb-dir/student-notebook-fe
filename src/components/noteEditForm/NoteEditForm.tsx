@@ -1,9 +1,9 @@
 import "./styles.scss";
 
-import { FC, MouseEvent } from "react";
+import { Dispatch, FC, MouseEvent, SetStateAction } from "react";
+import { Note, editNote, getNote } from "../../services/note";
 import { SubmitHandler, useForm } from "react-hook-form";
 
-import { editNote } from "../../services/note";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router";
 
@@ -12,7 +12,11 @@ type FormInput = {
   content: string;
   isHighPriority: boolean;
 };
-type NoteEditFormProps = FormInput & { onDiscard: () => void; _id: string };
+type NoteEditFormProps = FormInput & {
+  onDiscard: () => void;
+  _id: string;
+  setNoteData: Dispatch<SetStateAction<Note | null>>;
+};
 
 const NoteEditForm: FC<NoteEditFormProps> = ({
   title,
@@ -20,6 +24,7 @@ const NoteEditForm: FC<NoteEditFormProps> = ({
   isHighPriority,
   onDiscard,
   _id,
+  setNoteData,
 }) => {
   const navigate = useNavigate();
 
@@ -42,8 +47,10 @@ const NoteEditForm: FC<NoteEditFormProps> = ({
   }) => {
     try {
       await editNote(_id, { title, content, isHighPriority });
+      const data = await getNote(_id);
+      setNoteData(data);
       onDiscard();
-      navigate("/notes");
+      navigate(`/notes/${_id}`);
       toast.success("Note was edited");
     } catch (error: any) {
       toast.error(error.response.data.error);
