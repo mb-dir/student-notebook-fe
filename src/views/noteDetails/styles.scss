@@ -3,22 +3,23 @@
   width: 75%;
   margin: 0 auto;
   text-align: justify;
-  &__deleteButton {
+  &__button {
     border: none;
     border-radius: 4px;
-    background-color: $error-red;
     color: $light-gray;
     padding: 8px 16px;
-    &:hover {
-      cursor: pointer;
+    margin-right: 16px;
+    &--delete {
+      background-color: $error-red;
+      margin-left: 0;
     }
-  }
-  &__backButton {
-    border: none;
-    border-radius: 4px;
-    background-color: $blue;
-    color: $light-gray;
-    padding: 8px 16px;
+    &--edit {
+      background-color: $blue;
+    }
+    &--back {
+      background-color: $blue;
+      color: $light-gray;
+    }
     &:hover {
       cursor: pointer;
     }

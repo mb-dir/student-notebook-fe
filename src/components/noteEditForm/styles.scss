@@ -1,0 +1,80 @@
+@import "../../scss/variables";
+@import "../../scss/mixins";
+.noteEditForm {
+  background-color: $blue;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  min-height: 300px;
+  width: 75%;
+  margin: 0 auto;
+  padding: 16px;
+  border: 2px solid $light-gray;
+  border-radius: 4px;
+  &__inputWrapper {
+    margin: 12px;
+  }
+  &__label {
+    display: block;
+  }
+  &__input {
+    border: none;
+    border-bottom: 2px solid $light-gray;
+    padding: 4px;
+    &--error {
+      @include input-error;
+    }
+    &:focus {
+      @include input-focus;
+    }
+  }
+  &__textarea {
+    border: none;
+    border: 1px solid $light-gray;
+    border-radius: 4px;
+    padding: 4px;
+    width: 350px;
+    height: 230px;
+    resize: none;
+    &--error {
+      @include input-error;
+    }
+    &:focus {
+      @include input-focus;
+    }
+  }
+  &__error {
+    margin: 4px;
+    color: $error-red;
+    font-size: 12px;
+    height: 12px;
+  }
+  &__button {
+    border: none;
+    border-radius: 4px;
+    padding: 8px 12px;
+    min-width: 70px;
+    margin-top: 24px;
+    color: $white;
+    &--save {
+      background-color: $green;
+    }
+    &--discard {
+      background-color: $error-red;
+    }
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
+
+// media-queries
+
+@media (min-width: $lg) {
+  .noteForm {
+    width: 50%;
+    &__textarea {
+      width: 400px;
+    }
+  }
+}

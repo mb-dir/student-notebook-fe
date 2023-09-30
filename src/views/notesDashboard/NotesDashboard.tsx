@@ -2,6 +2,7 @@ import "./styles.scss";
 
 import { FC, useEffect, useState } from "react";
 import { NotesData, getNotes } from "../../services/note";
+import { useLocation, useNavigate } from "react-router";
 
 import { Collapse } from "react-collapse";
 import NoteForm from "../../components/noteForm/NoteForm";
@@ -10,17 +11,22 @@ import Pagination from "../../components/pagination/Pagination";
 import { toast } from "react-toastify";
 
 const NotesDashboard: FC = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
+  const page = location.state?.page;
   const [isAddNewNoteOpen, setIsAddNewNoteOpen] = useState<boolean>(false);
-  const [isShowAllNotesOpen, setIsShowAllNotesOpen] = useState<boolean>(false);
-  const [paginationPage, setPaginationPage] = useState<number>(1);
-
+  const [isShowAllNotesOpen, setIsShowAllNotesOpen] = useState<boolean>(true);
+  const [paginationPage, setPaginationPage] = useState<number>(page || 1);
   const onAddNewNoteClick = () => {
     setIsAddNewNoteOpen(prev => !prev);
     setIsShowAllNotesOpen(false);
+    navigate("/notes");
   };
   const onShowAllNotesClick = () => {
     setIsShowAllNotesOpen(prev => !prev);
     setIsAddNewNoteOpen(false);
+    // To keep the convention of URL
+    if (!page) navigate("/notes?page=1");
   };
 
   const [notesData, setNotesData] = useState<NotesData | null>(null);
@@ -62,12 +68,12 @@ const NotesDashboard: FC = () => {
         <Collapse isOpened={isShowAllNotesOpen}>
           {!!notesData?.notes.length ? (
             <>
-              <NotesGrid notes={notesData?.notes || []} />
+              <NotesGrid notes={notesData.notes} />
               <Pagination
                 page={paginationPage}
                 setPaginationPage={setPaginationPage}
-                totalNotesCount={notesData?.totalNotesCount || 1}
-                notesPerPage={notesData?.notesPerPage || 1}
+                totalNotesCount={notesData.totalNotesCount}
+                notesPerPage={notesData.notesPerPage}
               />
             </>
           ) : (
