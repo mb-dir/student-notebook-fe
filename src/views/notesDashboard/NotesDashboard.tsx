@@ -15,9 +15,7 @@ const NotesDashboard: FC = () => {
   const navigate = useNavigate();
   const page = location.state?.page;
   const [isAddNewNoteOpen, setIsAddNewNoteOpen] = useState<boolean>(false);
-  const [isShowAllNotesOpen, setIsShowAllNotesOpen] = useState<boolean>(
-    page ? true : false
-  );
+  const [isShowAllNotesOpen, setIsShowAllNotesOpen] = useState<boolean>(true);
   const [paginationPage, setPaginationPage] = useState<number>(page || 1);
   const onAddNewNoteClick = () => {
     setIsAddNewNoteOpen(prev => !prev);
