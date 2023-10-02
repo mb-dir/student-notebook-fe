@@ -1,9 +1,10 @@
 import "./styles.scss";
 
+import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { Dispatch, FC, MouseEvent, SetStateAction } from "react";
 import { Note, editNote, getNote } from "../../services/note";
-import { SubmitHandler, useForm } from "react-hook-form";
 
+import ReactQuill from "react-quill";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router";
 
@@ -31,6 +32,7 @@ const NoteEditForm: FC<NoteEditFormProps> = ({
   const {
     register,
     handleSubmit,
+    control,
     formState: { errors },
   } = useForm<FormInput>({
     defaultValues: {
@@ -78,14 +80,19 @@ const NoteEditForm: FC<NoteEditFormProps> = ({
         <label className="noteEditForm__label" htmlFor="content">
           Content
         </label>
-        <textarea
-          className={`noteEditForm__textarea ${
-            !!errors.content ? "noteEditForm__textarea--error" : ""
-          }`}
-          id="content"
-          {...register("content", {
-            required: "Content field is required",
-          })}
+        <Controller
+          name="content"
+          control={control}
+          rules={{ required: "Content field is required" }}
+          render={({ field }) => (
+            <ReactQuill
+              {...field}
+              id="content"
+              className={`noteForm__textarea ${
+                !!errors.content ? "noteForm__textarea--error" : ""
+              }`}
+            />
+          )}
         />
         <p className="noteEditForm__error">{errors.content?.message}</p>
       </div>

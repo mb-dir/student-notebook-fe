@@ -1,7 +1,8 @@
 @import "../../scss/variables";
 @import "../../scss/mixins";
 .noteEditForm {
-  background-color: $blue;
+  background-color: $light-gray;
+  color: $dark-gray;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
@@ -9,7 +10,6 @@
   width: 75%;
   margin: 0 auto;
   padding: 16px;
-  border: 2px solid $light-gray;
   border-radius: 4px;
   &__inputWrapper {
     margin: 12px;
