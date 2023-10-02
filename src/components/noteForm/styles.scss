@@ -15,6 +15,7 @@
   }
   &__label {
     display: block;
+    margin-bottom: 4px;
   }
   &__input {
     border: none;
@@ -28,15 +29,14 @@
     }
   }
   &__textarea {
-    border: none;
-    border: 1px solid $blue;
-    border-radius: 4px;
-    padding: 4px;
-    width: 400px;
-    height: 230px;
-    resize: none;
+    width: 100%;
+
+    margin-bottom: 12px;
     &--error {
       @include input-error;
+    }
+    & .ql-container {
+      height: 300px;
     }
     &:focus {
       @include input-focus;
