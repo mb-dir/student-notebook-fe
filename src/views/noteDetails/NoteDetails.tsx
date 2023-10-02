@@ -6,6 +6,7 @@ import { Note, deleteNote, getNote } from "../../services/note";
 import ConfirmPopup from "../../components/confirmPopup/ConfirmPopup";
 import Modal from "../../components/modal/Modal";
 import NoteEditForm from "../../components/noteEditForm/NoteEditForm";
+import renderHTML from "../../helpers/renderHTML";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router";
 import { useParams } from "react-router";
@@ -94,7 +95,7 @@ const NoteDetails: FC = () => {
             Back to notes dashboard
           </button>
           <h2>{noteData.title}</h2>
-          <p>{noteData.content}</p>
+          <p dangerouslySetInnerHTML={renderHTML(noteData.content)}></p>
           <p>Priority: {noteData.isHighPriority ? "High" : "Low"}</p>
           <button
             className="noteWrapper__button noteWrapper__button--back"
