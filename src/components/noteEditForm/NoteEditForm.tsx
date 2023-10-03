@@ -1,7 +1,7 @@
 import "./styles.scss";
 
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
-import { Dispatch, FC, MouseEvent, SetStateAction } from "react";
+import { Dispatch, FC, MouseEvent, SetStateAction, useRef } from "react";
 import { Note, editNote, getNote } from "../../services/note";
 
 import ReactQuill from "react-quill";
@@ -41,7 +41,13 @@ const NoteEditForm: FC<NoteEditFormProps> = ({
       isHighPriority,
     },
   });
+  const quillRef = useRef<ReactQuill | null>(null);
 
+  const onLabelClick = () => {
+    if (quillRef.current) {
+      quillRef.current.focus();
+    }
+  };
   const onSubmit: SubmitHandler<FormInput> = async ({
     title,
     content,
@@ -77,7 +83,11 @@ const NoteEditForm: FC<NoteEditFormProps> = ({
         <p className="noteEditForm__error">{errors.title?.message}</p>
       </div>
       <div className="noteEditForm__inputWrapper">
-        <label className="noteEditForm__label" htmlFor="content">
+        <label
+          className="noteEditForm__label"
+          htmlFor="content"
+          onClick={onLabelClick}
+        >
           Content
         </label>
         <Controller
@@ -87,6 +97,11 @@ const NoteEditForm: FC<NoteEditFormProps> = ({
           render={({ field }) => (
             <ReactQuill
               {...field}
+              ref={el => {
+                if (el) {
+                  quillRef.current = el;
+                }
+              }}
               id="content"
               className={`noteForm__textarea ${
                 !!errors.content ? "noteForm__textarea--error" : ""
