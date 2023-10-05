@@ -4,6 +4,7 @@ import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { Dispatch, FC, MouseEvent, SetStateAction, useRef } from "react";
 import { Note, editNote, getNote } from "../../services/note";
 
+import { Quill } from "quill";
 import ReactQuill from "react-quill";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router";
@@ -45,7 +46,9 @@ const NoteEditForm: FC<NoteEditFormProps> = ({
 
   const onLabelClick = () => {
     if (quillRef.current) {
-      quillRef.current.focus();
+      const quill: Quill = quillRef.current.getEditor();
+      quill.setSelection(quill.getLength(), quill.getLength());
+      quill.focus();
     }
   };
   const onSubmit: SubmitHandler<FormInput> = async ({
