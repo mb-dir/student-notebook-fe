@@ -16,6 +16,7 @@
   }
   &__label {
     display: block;
+    margin-bottom: 4px;
   }
   &__input {
     border: none;
@@ -38,9 +39,6 @@
     resize: none;
     &--error {
       @include input-error;
-    }
-    &:focus {
-      @include input-focus;
     }
   }
   &__error {

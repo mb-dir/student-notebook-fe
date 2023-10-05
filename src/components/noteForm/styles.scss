@@ -30,16 +30,12 @@
   }
   &__textarea {
     width: 100%;
-
     margin-bottom: 12px;
     &--error {
       @include input-error;
     }
     & .ql-container {
       height: 300px;
-    }
-    &:focus {
-      @include input-focus;
     }
   }
   &__error {
