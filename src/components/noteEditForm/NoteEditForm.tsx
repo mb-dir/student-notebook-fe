@@ -1,9 +1,11 @@
 import "./styles.scss";
 
-import { Dispatch, FC, MouseEvent, SetStateAction } from "react";
+import { Controller, SubmitHandler, useForm } from "react-hook-form";
+import { Dispatch, FC, MouseEvent, SetStateAction, useRef } from "react";
 import { Note, editNote, getNote } from "../../services/note";
-import { SubmitHandler, useForm } from "react-hook-form";
 
+import { Quill } from "quill";
+import ReactQuill from "react-quill";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router";
 
@@ -31,6 +33,7 @@ const NoteEditForm: FC<NoteEditFormProps> = ({
   const {
     register,
     handleSubmit,
+    control,
     formState: { errors },
   } = useForm<FormInput>({
     defaultValues: {
@@ -39,7 +42,15 @@ const NoteEditForm: FC<NoteEditFormProps> = ({
       isHighPriority,
     },
   });
+  const quillRef = useRef<ReactQuill | null>(null);
 
+  const onLabelClick = () => {
+    if (quillRef.current) {
+      const quill: Quill = quillRef.current.getEditor();
+      quill.setSelection(quill.getLength(), quill.getLength());
+      quill.focus();
+    }
+  };
   const onSubmit: SubmitHandler<FormInput> = async ({
     title,
     content,
@@ -75,17 +86,31 @@ const NoteEditForm: FC<NoteEditFormProps> = ({
         <p className="noteEditForm__error">{errors.title?.message}</p>
       </div>
       <div className="noteEditForm__inputWrapper">
-        <label className="noteEditForm__label" htmlFor="content">
+        <label
+          className="noteEditForm__label"
+          htmlFor="content"
+          onClick={onLabelClick}
+        >
           Content
         </label>
-        <textarea
-          className={`noteEditForm__textarea ${
-            !!errors.content ? "noteEditForm__textarea--error" : ""
-          }`}
-          id="content"
-          {...register("content", {
-            required: "Content field is required",
-          })}
+        <Controller
+          name="content"
+          control={control}
+          rules={{ required: "Content field is required" }}
+          render={({ field }) => (
+            <ReactQuill
+              {...field}
+              ref={el => {
+                if (el) {
+                  quillRef.current = el;
+                }
+              }}
+              id="content"
+              className={`noteForm__textarea ${
+                !!errors.content ? "noteForm__textarea--error" : ""
+              }`}
+            />
+          )}
         />
         <p className="noteEditForm__error">{errors.content?.message}</p>
       </div>
