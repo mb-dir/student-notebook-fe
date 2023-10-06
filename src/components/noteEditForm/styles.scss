@@ -1,6 +1,8 @@
 @import "../../scss/variables";
 @import "../../scss/mixins";
-.noteForm {
+.noteEditForm {
+  background-color: $light-gray;
+  color: $dark-gray;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
@@ -8,7 +10,6 @@
   width: 75%;
   margin: 0 auto;
   padding: 16px;
-  border: 2px solid $blue;
   border-radius: 4px;
   &__inputWrapper {
     margin: 12px;
@@ -19,7 +20,7 @@
   }
   &__input {
     border: none;
-    border-bottom: 2px solid $blue;
+    border-bottom: 2px solid $light-gray;
     padding: 4px;
     &--error {
       @include input-error;
@@ -29,13 +30,15 @@
     }
   }
   &__textarea {
-    width: 100%;
-    margin-bottom: 12px;
+    border: none;
+    border: 1px solid $light-gray;
+    border-radius: 4px;
+    padding: 4px;
+    width: 350px;
+    height: 230px;
+    resize: none;
     &--error {
       @include input-error;
-    }
-    & .ql-container {
-      height: 300px;
     }
   }
   &__error {
@@ -46,12 +49,17 @@
   }
   &__button {
     border: none;
-    background-color: $blue;
     border-radius: 4px;
-    color: $white;
     padding: 8px 12px;
     min-width: 70px;
     margin-top: 24px;
+    color: $white;
+    &--save {
+      background-color: $green;
+    }
+    &--discard {
+      background-color: $error-red;
+    }
     &:hover {
       cursor: pointer;
     }
@@ -63,5 +71,8 @@
 @media (min-width: $lg) {
   .noteForm {
     width: 50%;
+    &__textarea {
+      width: 400px;
+    }
   }
 }
