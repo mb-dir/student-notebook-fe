@@ -17,10 +17,12 @@ const NoteDetails: FC = () => {
   const [noteData, setNoteData] = useState<Note | null>(null);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState<boolean>(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const navigate = useNavigate();
 
   useEffect(() => {
     const getSingleNote = async () => {
+      setIsLoading(true);
       try {
         if (!noteId) {
           toast.error(
@@ -32,6 +34,8 @@ const NoteDetails: FC = () => {
         setNoteData(data);
       } catch (error: any) {
         toast.error(error.response.data.error);
+      } finally {
+        setIsLoading(false);
       }
     };
     getSingleNote();
@@ -55,6 +59,7 @@ const NoteDetails: FC = () => {
 
   return (
     <>
+      {isLoading && <Loader />}
       {isDeleteModalOpen && (
         <Modal onClose={() => setIsDeleteModalOpen(false)}>
           <ConfirmPopup
