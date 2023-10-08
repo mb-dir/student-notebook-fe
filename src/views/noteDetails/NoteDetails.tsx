@@ -4,6 +4,7 @@ import { FC, useEffect, useState } from "react";
 import { Note, deleteNote, getNote } from "../../services/note";
 
 import ConfirmPopup from "../../components/confirmPopup/ConfirmPopup";
+import Loader from "../../components/loader/Loader";
 import Modal from "../../components/modal/Modal";
 import NoteEditForm from "../../components/noteEditForm/NoteEditForm";
 import renderHTML from "../../helpers/renderHTML";
@@ -105,7 +106,7 @@ const NoteDetails: FC = () => {
           </button>
         </div>
       ) : (
-        <p>Loading...</p>
+        <Loader />
       )}
     </>
   );
