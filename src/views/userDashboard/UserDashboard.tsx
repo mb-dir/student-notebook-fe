@@ -1,7 +1,12 @@
 import { FC } from "react";
 
 const UserDashboard: FC = () => {
-  return <div>UserDashboard</div>;
+  return (
+    <header>
+      <h2>Time management app for studies.</h2>
+      <p>Access to your tasks, calendar, and notes all in one place!</p>
+    </header>
+  );
 };
 
 export default UserDashboard;
