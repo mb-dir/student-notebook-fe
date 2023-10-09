@@ -4,6 +4,7 @@ import { FC, useEffect, useState } from "react";
 import { Note, deleteNote, getNote } from "../../services/note";
 
 import ConfirmPopup from "../../components/confirmPopup/ConfirmPopup";
+import Loader from "../../components/loader/Loader";
 import Modal from "../../components/modal/Modal";
 import NoteEditForm from "../../components/noteEditForm/NoteEditForm";
 import renderHTML from "../../helpers/renderHTML";
@@ -16,10 +17,12 @@ const NoteDetails: FC = () => {
   const [noteData, setNoteData] = useState<Note | null>(null);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState<boolean>(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const navigate = useNavigate();
 
   useEffect(() => {
     const getSingleNote = async () => {
+      setIsLoading(true);
       try {
         if (!noteId) {
           toast.error(
@@ -31,6 +34,8 @@ const NoteDetails: FC = () => {
         setNoteData(data);
       } catch (error: any) {
         toast.error(error.response.data.error);
+      } finally {
+        setIsLoading(false);
       }
     };
     getSingleNote();
@@ -54,6 +59,7 @@ const NoteDetails: FC = () => {
 
   return (
     <>
+      {isLoading && <Loader />}
       {isDeleteModalOpen && (
         <Modal onClose={() => setIsDeleteModalOpen(false)}>
           <ConfirmPopup
@@ -105,7 +111,7 @@ const NoteDetails: FC = () => {
           </button>
         </div>
       ) : (
-        <p>Loading...</p>
+        <Loader />
       )}
     </>
   );
