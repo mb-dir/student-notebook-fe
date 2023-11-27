@@ -1,8 +1,6 @@
 import axios, { InternalAxiosRequestConfig } from "axios";
 
 import { User } from "./context/userContext";
-import { jwtDecode } from "jwt-decode";
-import { toast } from "react-toastify";
 
 const axiosInstance = axios.create({
   baseURL: "/api",
@@ -19,17 +17,7 @@ axiosInstance.interceptors.request.use(
     const token: string | null = user ? user.token : null;
 
     if (token) {
-      const decodedToken: any = jwtDecode(token);
-
-      // Check if the token is expired
-      // Stupid JS
-      // In a JWT (JSON Web Token), the expiration time (exp) is typically represented as the number of seconds since the Unix epoch (January 1, 1970, 00:00:00 UTC). This is known as a "Unix timestamp." JavaScript, on the other hand, represents time in milliseconds since the epoch. So, to compare the expiration time in the token (in seconds) with the current time in JavaScript (in milliseconds), you need to multiply the decodedToken.exp value by 1000 to convert it from seconds to milliseconds.
-      if (decodedToken.exp * 1000 < Date.now()) {
-        localStorage.removeItem("user");
-        toast.info("Your session has expired, please log in again.");
-      } else {
-        config.headers.Authorization = `Bearer ${token}`;
-      }
+      config.headers.Authorization = `Bearer ${token}`;
     }
 
     return config;
