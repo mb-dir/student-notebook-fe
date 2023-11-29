@@ -10,7 +10,7 @@ import { toast } from "react-toastify";
 import { useUserContext } from "../hooks/useUserContext";
 
 export const AppRouter: FC = () => {
-  const { user } = useUserContext();
+  const { user, logout } = useUserContext();
 
   const navigate = useNavigate();
   useEffect(() => {
@@ -25,13 +25,13 @@ export const AppRouter: FC = () => {
       // Stupid JS
       // In a JWT (JSON Web Token), the expiration time (exp) is typically represented as the number of seconds since the Unix epoch (January 1, 1970, 00:00:00 UTC). This is known as a "Unix timestamp." JavaScript, on the other hand, represents time in milliseconds since the epoch. So, to compare the expiration time in the token (in seconds) with the current time in JavaScript (in milliseconds), you need to multiply the decodedToken.exp value by 1000 to convert it from seconds to milliseconds.
       if (decodedToken.exp * 1000 < Date.now()) {
-        console.log("Będzie jazdaa");
         localStorage.removeItem("user");
+        logout();
         toast.info("Your session has expired, please log in again.");
         navigate("/login");
       }
     }
-  }, [navigate]);
+  }, [logout, navigate]);
 
   return (
     <Routes>
