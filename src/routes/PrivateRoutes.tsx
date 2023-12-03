@@ -1,6 +1,6 @@
+import { FC } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
 
-import { FC } from "react";
 import NoteDetails from "../views/noteDetails/NoteDetails";
 import NotesDashboard from "../views/notesDashboard/NotesDashboard";
 import UserDashboard from "../views/userDashboard/UserDashboard";
