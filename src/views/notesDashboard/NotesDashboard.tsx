@@ -35,6 +35,7 @@ const NotesDashboard: FC = () => {
     const getAllNotes = async () => {
       try {
         const data = await getNotes({ page: paginationPage });
+        console.log(data);
         setNotesData(data);
       } catch (error: any) {
         toast.error(error.response.data.error);
@@ -67,7 +68,7 @@ const NotesDashboard: FC = () => {
           <NoteForm setNotesData={setNotesData} />
         </Collapse>
         <Collapse isOpened={isShowAllNotesOpen}>
-          {!!notesData?.notes.length ? (
+          {!!notesData?.notes ? (
             <>
               <NotesGrid notes={notesData.notes} />
               <Pagination
