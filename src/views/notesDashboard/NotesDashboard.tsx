@@ -5,6 +5,8 @@ import { NotesData, getNotes } from "../../services/note";
 import { useLocation, useNavigate } from "react-router";
 
 import { Collapse } from "react-collapse";
+import Loader from "../../components/loader/Loader";
+import NoContent from "../../components/noContent/NoContent";
 import NoteForm from "../../components/noteForm/NoteForm";
 import NotesGrid from "../../components/notes/NotesGrid";
 import Pagination from "../../components/pagination/Pagination";
@@ -66,7 +68,7 @@ const NotesDashboard: FC = () => {
           <NoteForm setNotesData={setNotesData} />
         </Collapse>
         <Collapse isOpened={isShowAllNotesOpen}>
-          {!!notesData?.notes.length ? (
+          {!!notesData?.notes ? (
             <>
               <NotesGrid notes={notesData.notes} />
               <Pagination
@@ -77,7 +79,10 @@ const NotesDashboard: FC = () => {
               />
             </>
           ) : (
-            <div>No notes yet</div>
+            <Loader />
+          )}
+          {notesData?.notes.length === 0 && (
+            <NoContent>There are no notes</NoContent>
           )}
         </Collapse>
       </div>
