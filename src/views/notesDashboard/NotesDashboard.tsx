@@ -32,17 +32,13 @@ const NotesDashboard: FC = () => {
   const onShowAllNotesClick = () => {
     setIsShowAllNotesOpen(prev => !prev);
     setIsAddNewNoteOpen(false);
-    // To keep the convention of URL
-    if (!page) navigate("/notes?page=1");
   };
 
   const { handleSubmit, register } = useForm<FormInput>();
   const onSubmit: SubmitHandler<FormInput> = async ({ search }) => {
     try {
       setPaginationPage(1);
-      console.log(search);
-      navigate(`/notes?page=${paginationPage}&search=${search}`);
-      const data = await getNotes({ search, page: paginationPage });
+      const data = await getNotes({ search });
       setNotesData(data);
     } catch (error: any) {
       toast.error(error.response.data.error);
@@ -89,8 +85,7 @@ const NotesDashboard: FC = () => {
           {!!notesData?.notes ? (
             <>
               <form onSubmit={handleSubmit(onSubmit)}>
-                <label htmlFor="search">Search:</label>
-                <input type="text" id="search" {...register("search")} />
+                <input {...register("search")} />
                 <button>Szukaj</button>
               </form>
               <NotesGrid notes={notesData.notes} />
