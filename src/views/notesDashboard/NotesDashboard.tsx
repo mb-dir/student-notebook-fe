@@ -1,8 +1,8 @@
 import "./styles.scss";
 
-import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { FC, useEffect, useState } from "react";
 import { NotesData, getNotes } from "../../services/note";
+import { SubmitHandler, useForm } from "react-hook-form";
 import { useLocation, useNavigate } from "react-router";
 
 import { Collapse } from "react-collapse";
