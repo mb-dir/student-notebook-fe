@@ -2,8 +2,6 @@ import "./styles.scss";
 
 import { Dispatch, FC, SetStateAction } from "react";
 
-import { useNavigate } from "react-router-dom";
-
 type PaginationProps = {
   page: number;
   totalNotesCount: number;
