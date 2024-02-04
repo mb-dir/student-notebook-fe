@@ -2,13 +2,14 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { getNotes } from "../../services/note";
 import { FC } from "react";
+import { NotesData } from "../../services/note";
 type FormInput = {
   search: string;
 };
 type SearchFormProps = {
   setPaginationPage: (page: number) => void;
   // TODO
-  setNotesData: (data: any) => void;
+  setNotesData: (data: NotesData) => void;
 };
 const SearchForm: FC<SearchFormProps> = ({
   setPaginationPage,
