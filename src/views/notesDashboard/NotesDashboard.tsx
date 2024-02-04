@@ -2,8 +2,8 @@ import "./styles.scss";
 
 import { FC, useEffect, useState } from "react";
 import { NotesData, getNotes } from "../../services/note";
-import { SubmitHandler, useForm } from "react-hook-form";
 import { useLocation, useNavigate } from "react-router";
+import SearchForm from "../../components/searchForm/SearchForm";
 
 import { Collapse } from "react-collapse";
 import Loader from "../../components/loader/Loader";
@@ -13,9 +13,6 @@ import NotesGrid from "../../components/notes/NotesGrid";
 import Pagination from "../../components/pagination/Pagination";
 import { toast } from "react-toastify";
 
-type FormInput = {
-  search: string;
-};
 
 const NotesDashboard: FC = () => {
   const location = useLocation();
@@ -32,17 +29,6 @@ const NotesDashboard: FC = () => {
   const onShowAllNotesClick = () => {
     setIsShowAllNotesOpen(prev => !prev);
     setIsAddNewNoteOpen(false);
-  };
-
-  const { handleSubmit, register } = useForm<FormInput>();
-  const onSubmit: SubmitHandler<FormInput> = async ({ search }) => {
-    try {
-      setPaginationPage(1);
-      const data = await getNotes({ search });
-      setNotesData(data);
-    } catch (error: any) {
-      toast.error(error.response.data.error);
-    }
   };
 
   const [notesData, setNotesData] = useState<NotesData | null>(null);
@@ -84,10 +70,7 @@ const NotesDashboard: FC = () => {
         <Collapse isOpened={isShowAllNotesOpen}>
           {!!notesData?.notes ? (
             <>
-              <form onSubmit={handleSubmit(onSubmit)}>
-                <input {...register("search")} />
-                <button>Szukaj</button>
-              </form>
+              <SearchForm setNotesData={setNotesData} setPaginationPage={setPaginationPage} />
               <NotesGrid notes={notesData.notes} />
               <Pagination
                 page={paginationPage}
