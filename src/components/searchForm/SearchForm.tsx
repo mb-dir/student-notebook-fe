@@ -1,24 +1,24 @@
 import "./styles.scss";
 
-import { SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { getNotes } from "../../services/note";
-import { FC } from "react";
+import { Dispatch, FC, SetStateAction } from "react";
 import { NotesData } from "../../services/note";
 
-type FormInput = {
-  search: string;
-};
 type SearchFormProps = {
   setPaginationPage: (page: number) => void;
   setNotesData: (data: NotesData) => void;
+  setSearch: any;
+  search: string;
 };
 const SearchForm: FC<SearchFormProps> = ({
   setPaginationPage,
   setNotesData,
+  setSearch,
+  search,
 }) => {
-  const { handleSubmit, register } = useForm<FormInput>();
-  const onSubmit: SubmitHandler<FormInput> = async ({ search }) => {
+  const onSubmit = async (e: any) => {
+    e.preventDefault();
     try {
       setPaginationPage(1);
       const data = await getNotes({ search });
@@ -28,8 +28,8 @@ const SearchForm: FC<SearchFormProps> = ({
     }
   };
   return (
-    <form className="searchForm" onSubmit={handleSubmit(onSubmit)}>
-      <input className="searchForm__input" {...register("search")} />
+    <form className="searchForm" onSubmit={onSubmit}>
+      <input className="searchForm__input" onChange={setSearch} />
       <button className="searchForm__btn">Search</button>
     </form>
   );

@@ -13,7 +13,6 @@ import NotesGrid from "../../components/notes/NotesGrid";
 import Pagination from "../../components/pagination/Pagination";
 import { toast } from "react-toastify";
 
-
 const NotesDashboard: FC = () => {
   const location = useLocation();
   const navigate = useNavigate();
@@ -21,13 +20,14 @@ const NotesDashboard: FC = () => {
   const [isAddNewNoteOpen, setIsAddNewNoteOpen] = useState<boolean>(false);
   const [isShowAllNotesOpen, setIsShowAllNotesOpen] = useState<boolean>(true);
   const [paginationPage, setPaginationPage] = useState<number>(page || 1);
+  const [search, setSearch] = useState<string>("");
   const onAddNewNoteClick = () => {
-    setIsAddNewNoteOpen(prev => !prev);
+    setIsAddNewNoteOpen((prev) => !prev);
     setIsShowAllNotesOpen(false);
     navigate("/notes");
   };
   const onShowAllNotesClick = () => {
-    setIsShowAllNotesOpen(prev => !prev);
+    setIsShowAllNotesOpen((prev) => !prev);
     setIsAddNewNoteOpen(false);
   };
 
@@ -35,7 +35,7 @@ const NotesDashboard: FC = () => {
   useEffect(() => {
     const getAllNotes = async () => {
       try {
-        const data = await getNotes({ page: paginationPage });
+        const data = await getNotes({ page: paginationPage, search });
         setNotesData(data);
       } catch (error: any) {
         toast.error(error.response.data.error);
@@ -70,7 +70,12 @@ const NotesDashboard: FC = () => {
         <Collapse isOpened={isShowAllNotesOpen}>
           {!!notesData?.notes ? (
             <>
-              <SearchForm setNotesData={setNotesData} setPaginationPage={setPaginationPage} />
+              <SearchForm
+                setNotesData={setNotesData}
+                setPaginationPage={setPaginationPage}
+                setSearch={setSearch}
+                search={search}
+              />
               <NotesGrid notes={notesData.notes} />
               <Pagination
                 page={paginationPage}
