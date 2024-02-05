@@ -29,7 +29,10 @@ const SearchForm: FC<SearchFormProps> = ({
   };
   return (
     <form className="searchForm" onSubmit={onSubmit}>
-      <input className="searchForm__input" onChange={setSearch} />
+      <input
+        className="searchForm__input"
+        onChange={(e) => setSearch(e.target.value)}
+      />
       <button className="searchForm__btn">Search</button>
     </form>
   );
