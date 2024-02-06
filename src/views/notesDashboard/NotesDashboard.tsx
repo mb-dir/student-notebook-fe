@@ -12,6 +12,7 @@ import NoteForm from "../../components/noteForm/NoteForm";
 import NotesGrid from "../../components/notes/NotesGrid";
 import Pagination from "../../components/pagination/Pagination";
 import { toast } from "react-toastify";
+import { createSearchParams } from "react-router-dom";
 
 const NotesDashboard: FC = () => {
   const location = useLocation();
@@ -36,6 +37,13 @@ const NotesDashboard: FC = () => {
     const getAllNotes = async () => {
       try {
         const data = await getNotes({ page: paginationPage, search });
+        navigate({
+          pathname: "/notes",
+          search: `?${createSearchParams({
+            page: "" + paginationPage,
+            search,
+          })}`,
+        });
         setNotesData(data);
       } catch (error: any) {
         toast.error(error.response.data.error);
