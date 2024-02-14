@@ -2,7 +2,7 @@ import "./styles.scss";
 
 import { toast } from "react-toastify";
 import { getNotes } from "../../services/note";
-import { FC } from "react";
+import { FC, FormEvent } from "react";
 import { NotesData } from "../../services/note";
 import { useNavigate } from "react-router";
 import { createSearchParams } from "react-router-dom";
@@ -20,7 +20,7 @@ const SearchForm: FC<SearchFormProps> = ({
   search,
 }) => {
   const navigate = useNavigate();
-  const onSubmit = async (e: any) => {
+  const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
       setPaginationPage(1);
