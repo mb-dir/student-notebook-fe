@@ -2,8 +2,6 @@ import "./styles.scss";
 
 import { Dispatch, FC, SetStateAction } from "react";
 
-import { useNavigate } from "react-router-dom";
-
 type PaginationProps = {
   page: number;
   totalNotesCount: number;
@@ -17,16 +15,12 @@ const Pagination: FC<PaginationProps> = ({
   notesPerPage,
   setPaginationPage,
 }) => {
-  const navigate = useNavigate();
-
   const paginationButtonsAmount = Math.ceil(totalNotesCount / notesPerPage);
   const buttons = [];
 
   const handlePaginationClick = (i: number) => {
-    const state = { page: i };
     setPaginationPage(i);
     window.scrollTo({ top: 0 });
-    navigate(`/notes?page=${i}`, { state });
   };
 
   for (let i = 1; i <= paginationButtonsAmount; i++) {

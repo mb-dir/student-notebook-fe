@@ -7,7 +7,7 @@ export type Note = {
   isHighPriority: boolean;
 };
 
-type getNotesParams = { page: number };
+type getNotesParams = { page?: number; search?: string };
 
 export type NotesData = {
   notes: Note[];

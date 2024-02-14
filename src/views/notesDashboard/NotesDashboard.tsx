@@ -3,6 +3,7 @@ import "./styles.scss";
 import { FC, useEffect, useState } from "react";
 import { NotesData, getNotes } from "../../services/note";
 import { useLocation, useNavigate } from "react-router";
+import SearchForm from "../../components/searchForm/SearchForm";
 
 import { Collapse } from "react-collapse";
 import Loader from "../../components/loader/Loader";
@@ -11,6 +12,7 @@ import NoteForm from "../../components/noteForm/NoteForm";
 import NotesGrid from "../../components/notes/NotesGrid";
 import Pagination from "../../components/pagination/Pagination";
 import { toast } from "react-toastify";
+import { createSearchParams } from "react-router-dom";
 
 const NotesDashboard: FC = () => {
   const location = useLocation();
@@ -19,23 +21,29 @@ const NotesDashboard: FC = () => {
   const [isAddNewNoteOpen, setIsAddNewNoteOpen] = useState<boolean>(false);
   const [isShowAllNotesOpen, setIsShowAllNotesOpen] = useState<boolean>(true);
   const [paginationPage, setPaginationPage] = useState<number>(page || 1);
+  const [search, setSearch] = useState<string>("");
   const onAddNewNoteClick = () => {
-    setIsAddNewNoteOpen(prev => !prev);
+    setIsAddNewNoteOpen((prev) => !prev);
     setIsShowAllNotesOpen(false);
     navigate("/notes");
   };
   const onShowAllNotesClick = () => {
-    setIsShowAllNotesOpen(prev => !prev);
+    setIsShowAllNotesOpen((prev) => !prev);
     setIsAddNewNoteOpen(false);
-    // To keep the convention of URL
-    if (!page) navigate("/notes?page=1");
   };
 
   const [notesData, setNotesData] = useState<NotesData | null>(null);
   useEffect(() => {
     const getAllNotes = async () => {
       try {
-        const data = await getNotes({ page: paginationPage });
+        const data = await getNotes({ page: paginationPage, search });
+        navigate({
+          pathname: "/notes",
+          search: `?${createSearchParams({
+            page: "" + paginationPage,
+            search,
+          })}`,
+        });
         setNotesData(data);
       } catch (error: any) {
         toast.error(error.response.data.error);
@@ -70,6 +78,12 @@ const NotesDashboard: FC = () => {
         <Collapse isOpened={isShowAllNotesOpen}>
           {!!notesData?.notes ? (
             <>
+              <SearchForm
+                setNotesData={setNotesData}
+                setPaginationPage={setPaginationPage}
+                setSearch={setSearch}
+                search={search}
+              />
               <NotesGrid notes={notesData.notes} />
               <Pagination
                 page={paginationPage}
