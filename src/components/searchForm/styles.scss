@@ -1,0 +1,28 @@
+@import "../../scss/variables";
+@import "../../scss/mixins";
+
+.searchForm {
+  margin-bottom: 24px;
+  &__input {
+    border: none;
+    border-bottom: 2px solid $dark-gray;
+    padding: 8px;
+    width: 50%;
+    &--error {
+      @include input-error;
+    }
+    &:focus {
+      @include input-focus;
+    }
+  }
+  &__btn {
+    border: 2px solid $blue;
+    border-radius: 4px;
+    background-color: $white;
+    padding: 4px 12px;
+    margin-left: 12px;
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
