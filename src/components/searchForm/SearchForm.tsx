@@ -2,8 +2,10 @@ import "./styles.scss";
 
 import { toast } from "react-toastify";
 import { getNotes } from "../../services/note";
-import { Dispatch, FC, SetStateAction } from "react";
+import { FC } from "react";
 import { NotesData } from "../../services/note";
+import { useNavigate } from "react-router";
+import { createSearchParams } from "react-router-dom";
 
 type SearchFormProps = {
   setPaginationPage: (page: number) => void;
@@ -17,10 +19,18 @@ const SearchForm: FC<SearchFormProps> = ({
   setSearch,
   search,
 }) => {
+  const navigate = useNavigate();
   const onSubmit = async (e: any) => {
     e.preventDefault();
     try {
       setPaginationPage(1);
+      navigate({
+        pathname: "/notes",
+        search: `?${createSearchParams({
+          page: "1",
+          search,
+        })}`,
+      });
       const data = await getNotes({ search });
       setNotesData(data);
     } catch (error: any) {
