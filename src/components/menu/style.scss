@@ -6,5 +6,8 @@
   gap: 20px;
   &__link {
     @include link;
+    &--active {
+      font-weight: bold;
+    }
   }
 }
