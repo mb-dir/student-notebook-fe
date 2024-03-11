@@ -19,6 +19,10 @@ const Header: FC = () => {
         <Menu
           elements={[
             {
+              path: "/todos",
+              content: "Your todos",
+            },
+            {
               path: "/notes",
               content: "Your notes",
             },
